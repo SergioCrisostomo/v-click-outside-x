@@ -1,10 +1,8 @@
 import directive from './vClickOutside';
 
-const plugin = {
+export default {
+  directive,
   install(Vue) {
     Vue.directive('click-outside', directive);
   },
-  directive,
 };
-
-export default plugin;

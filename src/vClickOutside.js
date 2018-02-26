@@ -1,56 +1,80 @@
-import 'handjs';
-import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import forEach from 'lodash/forEach';
+import map from 'lodash/map';
+import noop from 'lodash/noop';
 
+const eventName = 'pointerdown';
+const instances = [];
+const eventHandler = function onEvent(event) {
+  const {
+    target,
+  } = event;
 
-const directive = {
-  $_instances: [],
-
-  $_events: ['pointerdown'],
-
-  $_onEvent(event) {
-    forEach(directive.$_instances, (instance) => {
-      if (typeof instance.fn === 'function' && event.target !== instance.el && !instance.el.contains(event.target)) {
-        instance.fn(event);
-      }
-    });
-  },
-
-  bind(el, binding) {
-    directive.$_instances.push({
-      el,
-      fn: binding.value,
-    });
-
-    if (directive.$_instances.length === 1) {
-      forEach(directive.$_events, (eventType) => {
-        document.addEventListener(eventType, directive.$_onEvent);
-      });
+  forEach(instances, ({el, value}) => {
+    if (target !== el && !el.contains(target)) {
+      value.call(this, event);
     }
-  },
-
-  unbind(el) {
-    const instanceIndex = findIndex(directive.$_instances, instance => instance.el === el);
-
-    directive.$_instances.splice(instanceIndex, 1);
-
-    if (directive.$_instances.length === 0) {
-      forEach(directive.$_events, (eventType) => {
-        document.removeEventListener(eventType, directive.$_onEvent);
-      });
-    }
-  },
-
-  update(el, binding) {
-    if (typeof binding.value !== 'function') {
-      throw new TypeError('Argument must be a function');
-    }
-
-    const foundInstance = find(directive.$_instances, instance => instance.el === el);
-
-    foundInstance.fn = binding.value;
-  },
+  });
 };
 
-export default directive;
+export default Object.defineProperties({}, {
+  $_eventName: {
+    get() {
+      return eventName;
+    },
+  },
+
+  $_instances: {
+    get() {
+      return map(instances, item => ({
+        ...item,
+      }));
+    },
+  },
+
+  $_onEvent: {
+    get() {
+      return eventHandler;
+    },
+  },
+
+  bind: {
+    value: function bind(el, {capture, value}) {
+      if (typeof value !== 'function') {
+        throw new TypeError('value must be a function');
+      }
+
+      const useCapture = !!capture;
+
+      if (instances.push({capture: useCapture, el, value}) === 1) {
+        document.addEventListener(eventName, eventHandler, useCapture);
+      }
+    },
+  },
+
+  componentUpdated: {
+    configurable: true,
+    value: noop,
+  },
+
+  inserted: {
+    configurable: true,
+    value: noop,
+  },
+
+  unbind: {
+    value: function unbind(el) {
+      const index = findIndex(instances, item => item.el === el);
+      const removed = instances.splice(index, 1);
+
+      if (instances.length === 0) {
+        document.removeEventListener(eventName, eventHandler, removed[0].capture);
+      }
+    },
+  },
+
+  update: {
+    configurable: true,
+    value: noop,
+  },
+});

@@ -22,7 +22,7 @@
 
 # v-click-outside-x
 
-Vue directive to react on clicks outside an element.
+Vue V2 directive to react on clicks outside an element.
 
 
 ## Install
@@ -83,6 +83,9 @@ import vClickOutside from 'v-click-outside-x'
   <div v-click-outside="onClickOutside"></div>
 </template>
 ```
+
+For support of the [PointerEvent API](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent),
+consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pepjs). 
 
 ## License
 [MIT License](https://github.com/ndelvalle/v-click-outside-x/blob/master/LICENSE)
