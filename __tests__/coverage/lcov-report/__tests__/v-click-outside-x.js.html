@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for __tests__/v-click-outside-x.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">__tests__</a> v-click-outside-x.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>84/84</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>19/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>83/83</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import noop from 'lodash/noop';
+import clickOutside from '../dist/v-click-outside-x';
+&nbsp;
+const plugin = clickOutside;
+const {
+  directive,
+} = clickOutside;
+&nbsp;
+describe('v-click-outside -&gt; plugin', () =&gt; {
+  it('install the directive into the vue instance', () =&gt; {
+    const vue = {
+      directive: jest.fn(),
+    };
+&nbsp;
+    plugin.install(vue);
+&nbsp;
+    expect(vue.directive).toHaveBeenCalledWith('click-outside', directive);
+    expect(vue.directive).toHaveBeenCalledTimes(1);
+  });
+});
+&nbsp;
+describe('v-click-outside -&gt; directive', () =&gt; {
+  const div1 = document.createElement('div');
+  const div2 = document.createElement('div');
+  const a = document.createElement('a');
+&nbsp;
+  afterEach(() =&gt; {
+    directive.$_instances = [];
+    directive.$_events = ['pointerdown'];
+  });
+&nbsp;
+  it('it has bind, update and unbind methods available', () =&gt; {
+    expect(typeof directive.bind).toBe('function');
+    expect(typeof directive.update).toBe('function');
+    expect(typeof directive.unbind).toBe('function');
+  });
+&nbsp;
+  describe('bind', () =&gt; {
+    it('adds an element to the $_instances list and adds an event listener (On non mobile devices)', () =&gt; {
+      directive.$_events = ['pointerdown'];
+      document.addEventListener = jest.fn();
+      directive.bind(div1, {});
+&nbsp;
+      expect(directive.$_instances).toHaveLength(1);
+      expect(directive.$_instances[0].el).toBe(div1);
+      expect(document.addEventListener.mock.calls).toHaveLength(1);
+    });
+&nbsp;
+    it('adds multiple elements to the $_instances list and adds an event listener (On mobile devices)', () =&gt; {
+      document.addEventListener = jest.fn();
+      directive.$_events = ['pointerdown'];
+      directive.bind(div1, {});
+      directive.bind(div2, {});
+&nbsp;
+      expect(directive.$_instances).toHaveLength(2);
+      expect(directive.$_instances[1].el).toBe(div2);
+      expect(document.addEventListener.mock.calls).toHaveLength(1);
+    });
+  });
+&nbsp;
+  describe('update', () =&gt; {
+    it('throws an error if value is not a function', () =&gt; {
+      const updateWithNoFunction = () =&gt; directive.update(div1, {});
+&nbsp;
+      expect(updateWithNoFunction).toThrowError(/Argument must be a function/);
+    });
+&nbsp;
+    it('saves the callback function', () =&gt; {
+      directive.bind(div1, {});
+      directive.update(div1, {
+        value: noop,
+      });
+&nbsp;
+      expect(directive.$_instances[0].fn).toBe(noop);
+    });
+  });
+&nbsp;
+  describe('unbind', () =&gt; {
+    it('removes the instance of the list and the event listener (On non mobile devices)', () =&gt; {
+      directive.$_events = ['pointerdown'];
+      document.removeEventListener = jest.fn();
+      directive.bind(div1, {});
+      directive.unbind(div1);
+&nbsp;
+      expect(directive.$_instances).toHaveLength(0);
+      expect(document.removeEventListener.mock.calls).toHaveLength(1);
+    });
+&nbsp;
+    it('removes the instance of the list and the event listener (On mobile devices)', () =&gt; {
+      directive.$_events = ['pointerdown'];
+      document.removeEventListener = jest.fn();
+      directive.bind(div1, {});
+      directive.unbind(div1);
+&nbsp;
+      expect(directive.$_instances).toHaveLength(0);
+      expect(document.removeEventListener.mock.calls).toHaveLength(1);
+    });
+&nbsp;
+    it('removes multiple $_instances of the list and the event listener', () =&gt; {
+      directive.$_events = ['pointerdown'];
+      document.removeEventListener = jest.fn();
+      directive.bind(div1, {});
+      directive.bind(div2, {});
+      directive.unbind(div1);
+&nbsp;
+      expect(directive.$_instances[0].el).toBe(div2);
+&nbsp;
+      directive.unbind(div2);
+&nbsp;
+      expect(directive.$_instances).toHaveLength(0);
+      expect(document.removeEventListener.mock.calls).toHaveLength(1);
+    });
+  });
+&nbsp;
+  describe('$_onEvent', () =&gt; {
+    it('calls the callback if the element is not the same and does not contains the event target', () =&gt; {
+      const event = {
+        target: a,
+      };
+&nbsp;
+      const cb = jest.fn();
+&nbsp;
+      directive.bind(div1, {});
+      directive.update(div1, {
+        value: cb,
+      });
+&nbsp;
+      directive.$_onEvent(event);
+&nbsp;
+      expect(cb).toHaveBeenCalledWith(event);
+    });
+&nbsp;
+    it('does not execute the callback if the event target its the element from the instance', () =&gt; {
+      const event = {
+        target: div1,
+      };
+&nbsp;
+      const cb = jest.fn();
+&nbsp;
+      directive.bind(div1, {});
+      directive.update(div1, {
+        value: cb,
+      });
+&nbsp;
+      directive.$_onEvent(event);
+&nbsp;
+      expect(cb).not.toHaveBeenCalled();
+    });
+  });
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 16:31:33 GMT+0100 (CET)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

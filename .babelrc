@@ -1,0 +1,33 @@
+{
+  "presets": [
+    ["env", {
+      "loose": false,
+      "modules": "commonjs",
+      "spec": true,
+      "targets": {
+        "browsers": [
+          "> 1%",
+          "last 3 Chrome versions",
+          "last 3 Firefox versions",
+          "Safari >= 10",
+          "Explorer >= 11",
+          "Edge >= 12",
+          "iOS >= 10",
+          "Android >= 6"
+        ]
+      },
+      "useBuiltIns": "usage",
+      "debug": false
+    }],
+    "stage-2"
+  ],
+  "plugins": [
+    "dynamic-import-node",
+    "lodash",
+    "transform-class-properties",
+    "transform-es5-property-mutators",
+    "transform-export-extensions",
+    "transform-object-rest-spread",
+    "transform-runtime"
+  ]
+}
