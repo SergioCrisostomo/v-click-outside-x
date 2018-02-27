@@ -1,7 +1,3 @@
-import assign from 'lodash/assign';
-import findIndex from 'lodash/findIndex';
-import forEach from 'lodash/forEach';
-import map from 'lodash/map';
 import noop from 'lodash/noop';
 
 const DEFAULT_MODIFIERS = Object.freeze({
@@ -11,18 +7,16 @@ const DEFAULT_MODIFIERS = Object.freeze({
 });
 
 const eventName = 'click';
-const captureInstances = [];
-const nonCaptureInstances = [];
+const captureInstances = new Map();
+const nonCaptureInstances = new Map();
 const instancesList = Object.freeze([captureInstances, nonCaptureInstances]);
-
-const findInstanceIndex = (instances, element) => findIndex(instances, ({el}) => el === element);
 
 const commonHandler = function onCommonEvent(instances, event) {
   const {
     target,
   } = event;
 
-  forEach(instances, ({el, modifiers, value}) => {
+  instances.forEach(({modifiers, value}, el) => {
     if (target !== el && !el.contains(target)) {
       if (modifiers.stop) {
         event.stopPropagation();
@@ -45,8 +39,6 @@ const nonCaptureEventHandler = function onNonCaptureEvent(event) {
   commonHandler.call(this, nonCaptureInstances, event);
 };
 
-const shallowCopyInstances = instances => map(instances, instance => assign({}, instance));
-
 export default Object.defineProperties({}, {
   $_eventName: {
     get() {
@@ -56,13 +48,13 @@ export default Object.defineProperties({}, {
 
   $_captureInstances: {
     get() {
-      return shallowCopyInstances(captureInstances);
+      return captureInstances;
     },
   },
 
   $_nonCaptureInstances: {
     get() {
-      return shallowCopyInstances(nonCaptureInstances);
+      return nonCaptureInstances;
     },
   },
 
@@ -84,11 +76,20 @@ export default Object.defineProperties({}, {
         throw new TypeError('value must be a function');
       }
 
-      const modifiersWithDefaults = assign({}, DEFAULT_MODIFIERS, modifiers);
-      const instances = modifiersWithDefaults.capture ? captureInstances : nonCaptureInstances;
+      const modifiersWithDefaults = {...DEFAULT_MODIFIERS, ...modifiers};
+      const useCapture = modifiersWithDefaults.capture;
+      const instances = useCapture ? captureInstances : nonCaptureInstances;
 
-      if (instances.push({el, modifiers: modifiersWithDefaults, value}) === 1) {
-        document.addEventListener(eventName, captureEventHandler, modifiersWithDefaults.capture);
+      if (instances.has(el)) {
+        throw new Error('element is already bound');
+      }
+
+      instances.set(el, {el, modifiers: modifiersWithDefaults, value});
+
+      if (instances.size === 1) {
+        const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
+
+        document.addEventListener(eventName, eventHandler, useCapture);
       }
     },
   },
@@ -105,14 +106,15 @@ export default Object.defineProperties({}, {
 
   unbind: {
     value: function unbind(el) {
-      forEach(instancesList, (instances) => {
-        const index = findInstanceIndex(instances, el);
+      instancesList.forEach((instances) => {
+        if (instances.size > 0) {
+          instances.delete(el);
 
-        if (index !== -1) {
-          const removedList = instances.splice(index, 1);
+          if (instances.size === 0) {
+            const useCapture = instances === captureInstances;
+            const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
 
-          if (instances.length === 0) {
-            document.removeEventListener(eventName, captureEventHandler, removedList.pop().modifiers.capture);
+            document.removeEventListener(eventName, eventHandler, useCapture);
           }
         }
       });

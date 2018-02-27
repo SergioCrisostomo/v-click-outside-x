@@ -185,18 +185,18 @@ module.exports = {
      */
     'lodash/matches-prop-shorthand': 'off',
     'lodash/matches-shorthand': 'off',
-    'lodash/prefer-constant': 'error',
-    'lodash/prefer-get': 'error',
-    'lodash/prefer-includes': 'error',
+    'lodash/prefer-constant': 'off',
+    'lodash/prefer-get': 'off',
+    'lodash/prefer-includes': 'off',
     'lodash/prefer-is-nil': 'error',
     'lodash/prefer-lodash-chain': 'off',
-    'lodash/prefer-lodash-method': 'error',
+    'lodash/prefer-lodash-method': 'off',
     'lodash/prefer-lodash-typecheck': 'off',
     'lodash/prefer-matches': 'off',
     'lodash/prefer-noop': 'error',
     'lodash/prefer-over-quantifier': 'off',
-    'lodash/prefer-some': 'error',
-    'lodash/prefer-startswith': 'error',
+    'lodash/prefer-some': 'off',
+    'lodash/prefer-startswith': 'off',
 
     /**
      * ESLint rule for suggesting that object spread properties be used.
