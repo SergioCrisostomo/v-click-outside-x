@@ -61,14 +61,7 @@ Vue.use(vClickOutside)
 </template>
 ```
 
-Or with useCapture option `true`
-```js
-<template>
-  <div v-click-outside.capture="onClickOutside"></div>
-</template>
-```
-
-Or use it as a directive
+## Directive
 
 ```js
 import vClickOutside from 'v-click-outside-x'
@@ -90,6 +83,32 @@ import vClickOutside from 'v-click-outside-x'
   <div v-click-outside="onClickOutside"></div>
 </template>
 ```
+
+## Event Modifiers
+
+It is a very common need to call event.preventDefault() or event.stopPropagation()
+inside event handlers. Although we can do this easily inside methods, it would be
+better if the methods can be purely about data logic rather than having to deal
+with DOM event details.
+```js
+<template>
+  <!-- the click event's propagation will be stopped -->
+  <div v-click-outside.stop="doThis"></div>
+  
+  <!-- the click event's default will be stopped -->
+  <div v-click-outside.prevent="doThat"></div>
+  
+  <!-- modifiers can be chained -->
+  <div v-click-outside.stop.prevent="doThat"></adiv
+ 
+  <!-- use capture mode when adding the event listener -->
+  <div v-click-outside.capture="doThis"></div>
+</template>
+```
+
+## Pointer Events
+
+NOT YET SUPPORTED!
 
 For support of the [PointerEvent API](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent),
 consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pepjs). 

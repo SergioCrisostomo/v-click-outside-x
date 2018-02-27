@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>97/97</span>
+        <span class='fraction'>112/112</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>96/96</span>
+        <span class='fraction'>111/111</span>
       </div>
     </div>
   </div>
@@ -217,7 +217,41 @@
 172
 173
 174
-175</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -340,19 +374,32 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -361,6 +408,27 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,17 +478,17 @@ describe('v-click-outside -&gt; plugin', () =&gt; {
     });
   });
 &nbsp;
-  it('$_instances is an empty array', () =&gt; {
-    expect(directive.$_instances).toBeInstanceOf(Array);
-    expect(directive.$_instances).toHaveLength(0);
+  it('$_nonCaptureInstances is an empty array', () =&gt; {
+    expect(directive.$_nonCaptureInstances).toBeInstanceOf(Array);
+    expect(directive.$_nonCaptureInstances).toHaveLength(0);
   });
 &nbsp;
-  it('$_eventName is the string `pointerdown`', () =&gt; {
-    expect(directive.$_eventName).toBe('pointerdown');
+  it('$_eventName is the string `click`', () =&gt; {
+    expect(directive.$_eventName).toBe('click');
   });
 &nbsp;
-  it('$_onEvent to be a function', () =&gt; {
-    expect(directive.$_onEvent).toBeInstanceOf(Function);
+  it('$_onCaptureEvent to be a function', () =&gt; {
+    expect(directive.$_onCaptureEvent).toBeInstanceOf(Function);
   });
 &nbsp;
   it('install the directive into the vue instance', () =&gt; {
@@ -465,15 +533,15 @@ describe('v-click-outside -&gt; directive', () =&gt; {
 &nbsp;
         directive.bind(div1, {value: mock});
 &nbsp;
-        expect(directive.$_instances).toHaveLength(1);
-        expect(directive.$_instances[0].el).toBe(div1);
+        expect(directive.$_nonCaptureInstances).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances[0].el).toBe(div1);
         expect(document.addEventListener.mock.calls).toHaveLength(1);
       });
 &nbsp;
       it('removes from the list and event listener', () =&gt; {
         directive.unbind(div1);
 &nbsp;
-        expect(directive.$_instances).toHaveLength(0);
+        expect(directive.$_nonCaptureInstances).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -489,19 +557,19 @@ describe('v-click-outside -&gt; directive', () =&gt; {
         directive.bind(div1, {value: mock1});
         directive.bind(div2, {value: mock2});
 &nbsp;
-        expect(directive.$_instances).toHaveLength(2);
-        expect(directive.$_instances[1].el).toBe(div2);
+        expect(directive.$_nonCaptureInstances).toHaveLength(2);
+        expect(directive.$_nonCaptureInstances[1].el).toBe(div2);
         expect(document.addEventListener.mock.calls).toHaveLength(1);
       });
 &nbsp;
       it('removes from the list and the event listener', () =&gt; {
         directive.unbind(div1);
 &nbsp;
-        expect(directive.$_instances[0].el).toBe(div2);
+        expect(directive.$_nonCaptureInstances[0].el).toBe(div2);
 &nbsp;
         directive.unbind(div2);
 &nbsp;
-        expect(directive.$_instances).toHaveLength(0);
+        expect(directive.$_nonCaptureInstances).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -510,24 +578,47 @@ describe('v-click-outside -&gt; directive', () =&gt; {
       it('saves the instance binding and element', () =&gt; {
         const div1 = document.createElement('div');
         const div2 = document.createElement('div');
+        const div3 = document.createElement('div');
         const mock1 = jest.fn();
         const mock2 = jest.fn();
         const binding1 = {modifiers: {capture: true}, value: mock1};
-        const binding2 = {value: mock2};
+        const binding2 = {modifiers: {stop: true}, value: mock2};
+        const binding3 = {modifiers: {prevent: true}, value: mock2};
+        const modifiers1 = {
+          capture: true,
+          prevent: false,
+          stop: false,
+        };
+&nbsp;
+        const modifiers2 = {
+          capture: false,
+          prevent: false,
+          stop: true,
+        };
+&nbsp;
+        const modifiers3 = {
+          capture: false,
+          prevent: true,
+          stop: false,
+        };
 &nbsp;
         directive.bind(div1, binding1);
         directive.bind(div2, binding2);
+        directive.bind(div3, binding3);
 &nbsp;
-        expect(directive.$_instances[0]).toEqual({capture: true, el: div1, value: mock1});
-        expect(directive.$_instances[1]).toEqual({capture: false, el: div2, value: mock2});
+        expect(directive.$_captureInstances[0]).toEqual({modifiers: modifiers1, el: div1, value: mock1});
+&nbsp;
+        expect(directive.$_nonCaptureInstances[0]).toEqual({modifiers: modifiers2, el: div2, value: mock2});
+        expect(directive.$_nonCaptureInstances[1]).toEqual({modifiers: modifiers3, el: div3, value: mock2});
 &nbsp;
         directive.unbind(div1);
         directive.unbind(div2);
+        directive.unbind(div3);
       });
     });
   });
 &nbsp;
-  describe('$_onEvent', () =&gt; {
+  describe('$_onCaptureEvent', () =&gt; {
     const div1 = document.createElement('div');
 &nbsp;
     it('calls the callback if the element is not the same and does not contains the event target', () =&gt; {
@@ -536,14 +627,25 @@ describe('v-click-outside -&gt; directive', () =&gt; {
         target: a,
       };
 &nbsp;
-      const mock = jest.fn();
+      const mock1 = jest.fn();
 &nbsp;
-      directive.bind(div1, {value: mock});
-      directive.$_onEvent(event);
+      directive.bind(div1, {value: mock1});
+      directive.$_onNonCaptureEvent(event);
 &nbsp;
-      expect(mock).toHaveBeenCalledWith(event);
-      expect(mock.mock.instances).toHaveLength(1);
-      expect(mock.mock.instances[0]).toBe(directive);
+      expect(mock1).toHaveBeenCalledWith(event);
+      expect(mock1.mock.instances).toHaveLength(1);
+      expect(mock1.mock.instances[0]).toBe(directive);
+&nbsp;
+      directive.unbind(div1);
+&nbsp;
+      const mock2 = jest.fn();
+&nbsp;
+      directive.bind(div1, {modifiers: {capture: true}, value: mock2});
+      directive.$_onCaptureEvent(event);
+&nbsp;
+      expect(mock2).toHaveBeenCalledWith(event);
+      expect(mock2.mock.instances).toHaveLength(1);
+      expect(mock2.mock.instances[0]).toBe(directive);
 &nbsp;
       directive.unbind(div1);
     });
@@ -556,7 +658,7 @@ describe('v-click-outside -&gt; directive', () =&gt; {
       const mock = jest.fn();
 &nbsp;
       directive.bind(div1, {value: mock});
-      directive.$_onEvent(event);
+      directive.$_onCaptureEvent(event);
 &nbsp;
       expect(mock).not.toHaveBeenCalled();
       expect(mock.mock.instances).toHaveLength(0);
@@ -571,7 +673,7 @@ describe('v-click-outside -&gt; directive', () =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Feb 27 2018 12:31:32 GMT+0100 (CET)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Feb 27 2018 16:08:51 GMT+0100 (CET)
 </div>
 </div>
 <script src="../prettify.js"></script>

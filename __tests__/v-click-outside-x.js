@@ -17,17 +17,17 @@ describe('v-click-outside -> plugin', () => {
     });
   });
 
-  it('$_instances is an empty array', () => {
-    expect(directive.$_instances).toBeInstanceOf(Array);
-    expect(directive.$_instances).toHaveLength(0);
+  it('$_nonCaptureInstances is an empty array', () => {
+    expect(directive.$_nonCaptureInstances).toBeInstanceOf(Array);
+    expect(directive.$_nonCaptureInstances).toHaveLength(0);
   });
 
-  it('$_eventName is the string `pointerdown`', () => {
-    expect(directive.$_eventName).toBe('pointerdown');
+  it('$_eventName is the string `click`', () => {
+    expect(directive.$_eventName).toBe('click');
   });
 
-  it('$_onEvent to be a function', () => {
-    expect(directive.$_onEvent).toBeInstanceOf(Function);
+  it('$_onCaptureEvent to be a function', () => {
+    expect(directive.$_onCaptureEvent).toBeInstanceOf(Function);
   });
 
   it('install the directive into the vue instance', () => {
@@ -72,15 +72,15 @@ describe('v-click-outside -> directive', () => {
 
         directive.bind(div1, {value: mock});
 
-        expect(directive.$_instances).toHaveLength(1);
-        expect(directive.$_instances[0].el).toBe(div1);
+        expect(directive.$_nonCaptureInstances).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances[0].el).toBe(div1);
         expect(document.addEventListener.mock.calls).toHaveLength(1);
       });
 
       it('removes from the list and event listener', () => {
         directive.unbind(div1);
 
-        expect(directive.$_instances).toHaveLength(0);
+        expect(directive.$_nonCaptureInstances).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -96,19 +96,19 @@ describe('v-click-outside -> directive', () => {
         directive.bind(div1, {value: mock1});
         directive.bind(div2, {value: mock2});
 
-        expect(directive.$_instances).toHaveLength(2);
-        expect(directive.$_instances[1].el).toBe(div2);
+        expect(directive.$_nonCaptureInstances).toHaveLength(2);
+        expect(directive.$_nonCaptureInstances[1].el).toBe(div2);
         expect(document.addEventListener.mock.calls).toHaveLength(1);
       });
 
       it('removes from the list and the event listener', () => {
         directive.unbind(div1);
 
-        expect(directive.$_instances[0].el).toBe(div2);
+        expect(directive.$_nonCaptureInstances[0].el).toBe(div2);
 
         directive.unbind(div2);
 
-        expect(directive.$_instances).toHaveLength(0);
+        expect(directive.$_nonCaptureInstances).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -117,24 +117,47 @@ describe('v-click-outside -> directive', () => {
       it('saves the instance binding and element', () => {
         const div1 = document.createElement('div');
         const div2 = document.createElement('div');
+        const div3 = document.createElement('div');
         const mock1 = jest.fn();
         const mock2 = jest.fn();
         const binding1 = {modifiers: {capture: true}, value: mock1};
-        const binding2 = {value: mock2};
+        const binding2 = {modifiers: {stop: true}, value: mock2};
+        const binding3 = {modifiers: {prevent: true}, value: mock2};
+        const modifiers1 = {
+          capture: true,
+          prevent: false,
+          stop: false,
+        };
+
+        const modifiers2 = {
+          capture: false,
+          prevent: false,
+          stop: true,
+        };
+
+        const modifiers3 = {
+          capture: false,
+          prevent: true,
+          stop: false,
+        };
 
         directive.bind(div1, binding1);
         directive.bind(div2, binding2);
+        directive.bind(div3, binding3);
 
-        expect(directive.$_instances[0]).toEqual({capture: true, el: div1, value: mock1});
-        expect(directive.$_instances[1]).toEqual({capture: false, el: div2, value: mock2});
+        expect(directive.$_captureInstances[0]).toEqual({modifiers: modifiers1, el: div1, value: mock1});
+
+        expect(directive.$_nonCaptureInstances[0]).toEqual({modifiers: modifiers2, el: div2, value: mock2});
+        expect(directive.$_nonCaptureInstances[1]).toEqual({modifiers: modifiers3, el: div3, value: mock2});
 
         directive.unbind(div1);
         directive.unbind(div2);
+        directive.unbind(div3);
       });
     });
   });
 
-  describe('$_onEvent', () => {
+  describe('$_onCaptureEvent', () => {
     const div1 = document.createElement('div');
 
     it('calls the callback if the element is not the same and does not contains the event target', () => {
@@ -143,14 +166,25 @@ describe('v-click-outside -> directive', () => {
         target: a,
       };
 
-      const mock = jest.fn();
+      const mock1 = jest.fn();
 
-      directive.bind(div1, {value: mock});
-      directive.$_onEvent(event);
+      directive.bind(div1, {value: mock1});
+      directive.$_onNonCaptureEvent(event);
 
-      expect(mock).toHaveBeenCalledWith(event);
-      expect(mock.mock.instances).toHaveLength(1);
-      expect(mock.mock.instances[0]).toBe(directive);
+      expect(mock1).toHaveBeenCalledWith(event);
+      expect(mock1.mock.instances).toHaveLength(1);
+      expect(mock1.mock.instances[0]).toBe(directive);
+
+      directive.unbind(div1);
+
+      const mock2 = jest.fn();
+
+      directive.bind(div1, {modifiers: {capture: true}, value: mock2});
+      directive.$_onCaptureEvent(event);
+
+      expect(mock2).toHaveBeenCalledWith(event);
+      expect(mock2.mock.instances).toHaveLength(1);
+      expect(mock2.mock.instances[0]).toBe(directive);
 
       directive.unbind(div1);
     });
@@ -163,7 +197,7 @@ describe('v-click-outside -> directive', () => {
       const mock = jest.fn();
 
       directive.bind(div1, {value: mock});
-      directive.$_onEvent(event);
+      directive.$_onCaptureEvent(event);
 
       expect(mock).not.toHaveBeenCalled();
       expect(mock.mock.instances).toHaveLength(0);
