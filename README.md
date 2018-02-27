@@ -61,6 +61,13 @@ Vue.use(vClickOutside)
 </template>
 ```
 
+Or with useCapture option `true`
+```js
+<template>
+  <div v-click-outside.capture="onClickOutside"></div>
+</template>
+```
+
 Or use it as a directive
 
 ```js
