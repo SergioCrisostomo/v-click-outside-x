@@ -39,15 +39,15 @@ export default Object.defineProperties({}, {
   },
 
   bind: {
-    value: function bind(el, {capture, value}) {
+    value: function bind(el, {modifiers = {}, value}) {
       if (typeof value !== 'function') {
         throw new TypeError('value must be a function');
       }
 
-      const useCapture = !!capture;
+      const capture = !!modifiers.capture;
 
-      if (instances.push({capture: useCapture, el, value}) === 1) {
-        document.addEventListener(eventName, eventHandler, useCapture);
+      if (instances.push({capture, el, value}) === 1) {
+        document.addEventListener(eventName, eventHandler, capture);
       }
     },
   },

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519725959613" clover="3.2.0">
-  <project timestamp="1519725959614" name="All files">
-    <metrics statements="97" coveredstatements="97" conditionals="223" coveredconditionals="77" methods="153" coveredmethods="111" elements="473" coveredelements="285" complexity="0" loc="97" ncloc="97" packages="2" files="2" classes="2">
+<coverage generated="1519731092665" clover="3.2.0">
+  <project timestamp="1519731092665" name="All files">
+    <metrics statements="97" coveredstatements="97" conditionals="225" coveredconditionals="79" methods="153" coveredmethods="111" elements="475" coveredelements="287" complexity="0" loc="97" ncloc="97" packages="2" files="2" classes="2">
       <package name="__tests__">
         <metrics statements="96" coveredstatements="96" conditionals="0" coveredconditionals="0" methods="26" coveredmethods="26"/>
         <file name="v-click-outside-x.js" path="/Users/grahamfairweather/.private/v-click-outside-x/__tests__/v-click-outside-x.js">
@@ -105,10 +105,10 @@
         </file>
       </package>
       <package name="dist">
-        <metrics statements="1" coveredstatements="1" conditionals="223" coveredconditionals="77" methods="127" coveredmethods="85"/>
+        <metrics statements="1" coveredstatements="1" conditionals="225" coveredconditionals="79" methods="127" coveredmethods="85"/>
         <file name="v-click-outside-x.js" path="/Users/grahamfairweather/.private/v-click-outside-x/dist/v-click-outside-x.js">
-          <metrics statements="1" coveredstatements="1" conditionals="223" coveredconditionals="77" methods="127" coveredmethods="85"/>
-          <line num="1" count="69" type="cond" truecount="77" falsecount="146"/>
+          <metrics statements="1" coveredstatements="1" conditionals="225" coveredconditionals="79" methods="127" coveredmethods="85"/>
+          <line num="1" count="69" type="cond" truecount="79" falsecount="146"/>
         </file>
       </package>
     </metrics>

@@ -119,7 +119,7 @@ describe('v-click-outside -> directive', () => {
         const div2 = document.createElement('div');
         const mock1 = jest.fn();
         const mock2 = jest.fn();
-        const binding1 = {capture: true, value: mock1};
+        const binding1 = {modifiers: {capture: true}, value: mock1};
         const binding2 = {value: mock2};
 
         directive.bind(div1, binding1);
