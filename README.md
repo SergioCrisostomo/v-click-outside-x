@@ -92,7 +92,7 @@ behave more like their native elements.
 
 ```js
 <template>
-  <!-- the click event's propagation will be stopped -->
+  <!-- the click event´s propagation will be stopped -->
   <div v-click-outside.stop="doThis"></div>
   
   <!-- the click event's default will be stopped -->
