@@ -22,8 +22,7 @@
 
 # v-click-outside-x
 
-Vue V2 directive to react on clicks outside an element.
-
+Vue V2 directive to react on `clicks` outside an element.
 
 ## Install
 
@@ -34,7 +33,6 @@ $ npm install --save v-click-outside-x
 ```bash
 $ yarn add v-click-outside-x
 ```
-
 
 ## Use
 
@@ -86,10 +84,12 @@ import vClickOutside from 'v-click-outside-x'
 
 ## Event Modifiers
 
-It is a very common need to call event.preventDefault() or event.stopPropagation()
-inside event handlers. Although we can do this easily inside methods, it would be
-better if the methods can be purely about data logic rather than having to deal
-with DOM event details.
+It is not a very common need to call event.preventDefault() or event.stopPropagation()
+for click outside event handlers. Care should be taken when using these!
+
+The need for capture though, is reasonably common when you want menus or dropdown to
+behave more like their native elements.
+
 ```js
 <template>
   <!-- the click event's propagation will be stopped -->
@@ -106,12 +106,57 @@ with DOM event details.
 </template>
 ```
 
-## Pointer Events
+## Pointer Events Examples
 
-NOT YET SUPPORTED!
+By default, if no argument is supplied then `click` will be used. You can specify
+the event type being bound by supplying an arguments, i.e. `pointerdown`.
+
+```js
+<script>
+  export default {
+    methods: {
+      onClickOutside (event) {
+        console.log('Clicked outside. Event: ', event)
+      }
+    }
+  };
+</script>
+
+<template>
+  <div v-click-outside:pointerdown="onClickOutside"></div>
+</template>
+```
 
 For support of the [PointerEvent API](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent),
 consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pepjs). 
+
+# Multiple Events Examples
+
+```js
+<script>
+  export default {
+    methods: {
+      onClickOutside1 (event) {
+        console.log('Clicked outside 1. Event: ', event)
+      },
+      onClickOutside2 (event) {
+        console.log('Clicked outside 2. Event: ', event)
+      },
+      onClickOutside3 (event) {
+        console.log('Clicked outside 3. Event: ', event)
+      }
+    }
+  };
+</script>
+
+<template>
+  <div 
+    v-click-outside.capture="onClickOutside1"
+    v-click-outside:click="onClickOutside2"
+    v-click-outside:pointerdown.capture="onClickOutside3"
+  ></div>
+</template>
+```
 
 ## License
 [MIT License](https://github.com/ndelvalle/v-click-outside-x/blob/master/LICENSE)

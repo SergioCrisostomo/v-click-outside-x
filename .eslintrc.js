@@ -43,7 +43,7 @@ module.exports = {
    */
   overrides: [
     {
-      files: ['webpack.*.js', '__tests_/**/*.js'],
+      files: ['webpack.*.js', '__tests__/*.js'],
       rules: {
         'compat/compat': 'off',
         'global-require': 'off',
@@ -188,12 +188,12 @@ module.exports = {
     'lodash/prefer-constant': 'off',
     'lodash/prefer-get': 'off',
     'lodash/prefer-includes': 'off',
-    'lodash/prefer-is-nil': 'error',
+    'lodash/prefer-is-nil': 'off',
     'lodash/prefer-lodash-chain': 'off',
     'lodash/prefer-lodash-method': 'off',
     'lodash/prefer-lodash-typecheck': 'off',
     'lodash/prefer-matches': 'off',
-    'lodash/prefer-noop': 'error',
+    'lodash/prefer-noop': 'off',
     'lodash/prefer-over-quantifier': 'off',
     'lodash/prefer-some': 'off',
     'lodash/prefer-startswith': 'off',

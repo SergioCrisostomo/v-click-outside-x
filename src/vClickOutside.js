@@ -1,33 +1,27 @@
-import noop from 'lodash/noop';
-
-const DEFAULT_MODIFIERS = Object.freeze({
-  capture: false,
-  prevent: false,
-  stop: false,
-});
-
-const eventName = 'click';
+const CLICK = 'click';
 const captureInstances = new Map();
 const nonCaptureInstances = new Map();
-const instancesList = Object.freeze([captureInstances, nonCaptureInstances]);
+const instancesList = [captureInstances, nonCaptureInstances];
 
 const commonHandler = function onCommonEvent(instances, event) {
   const {
     target,
   } = event;
 
-  instances.forEach(({modifiers, value}, el) => {
-    if (target !== el && !el.contains(target)) {
-      if (modifiers.stop) {
-        event.stopPropagation();
-      }
+  instances.forEach((instance) => {
+    instance.forEach(({el, binding}) => {
+      if (target !== el && !el.contains(target)) {
+        if (binding.modifiers.stop) {
+          event.stopPropagation();
+        }
 
-      if (modifiers.prevent) {
-        event.preventDefault();
-      }
+        if (binding.modifiers.prevent) {
+          event.preventDefault();
+        }
 
-      value.call(this, event);
-    }
+        binding.value.call(this, event);
+      }
+    });
   });
 };
 
@@ -40,12 +34,6 @@ const nonCaptureEventHandler = function onNonCaptureEvent(event) {
 };
 
 export default Object.defineProperties({}, {
-  $_eventName: {
-    get() {
-      return eventName;
-    },
-  },
-
   $_captureInstances: {
     get() {
       return captureInstances;
@@ -71,58 +59,61 @@ export default Object.defineProperties({}, {
   },
 
   bind: {
-    value: function bind(el, {modifiers, value}) {
-      if (typeof value !== 'function') {
-        throw new TypeError('value must be a function');
+    value: function bind(el, binding) {
+      if (typeof binding.value !== 'function') {
+        throw new TypeError('Binding value must be a function.');
       }
 
-      const modifiersWithDefaults = {...DEFAULT_MODIFIERS, ...modifiers};
-      const useCapture = modifiersWithDefaults.capture;
+      const arg = binding.arg || CLICK;
+      const normalisedBinding = {
+        ...binding,
+        arg,
+        modifiers: {
+          capture: false,
+          prevent: false,
+          stop: false,
+          ...binding.modifiers,
+        },
+      };
+
+      const useCapture = normalisedBinding.modifiers.capture;
       const instances = useCapture ? captureInstances : nonCaptureInstances;
-
-      if (instances.has(el)) {
-        throw new Error('element is already bound');
+      if (!instances.has(arg)) {
+        instances.set(arg, []);
       }
 
-      instances.set(el, {el, modifiers: modifiersWithDefaults, value});
+      const typeList = instances.get(arg);
 
-      if (instances.size === 1) {
+      typeList.push({el, binding: normalisedBinding});
+
+      if (typeList.length === 1) {
         const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
 
-        document.addEventListener(eventName, eventHandler, useCapture);
+        document.addEventListener(arg, eventHandler, useCapture);
       }
     },
-  },
-
-  componentUpdated: {
-    configurable: true,
-    value: noop,
-  },
-
-  inserted: {
-    configurable: true,
-    value: noop,
   },
 
   unbind: {
     value: function unbind(el) {
       instancesList.forEach((instances) => {
         if (instances.size > 0) {
-          instances.delete(el);
+          const useCapture = instances === captureInstances;
 
-          if (instances.size === 0) {
-            const useCapture = instances === captureInstances;
-            const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
+          instances.forEach((instance, eventName) => {
+            const newInstance = instance.filter(directive => directive.el !== el);
 
-            document.removeEventListener(eventName, eventHandler, useCapture);
-          }
+            if (newInstance.length === 0) {
+              const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
+
+              document.removeEventListener(eventName, eventHandler, useCapture);
+              instances.delete(eventName);
+            } else {
+              instances.set(eventName, newInstance);
+            }
+          });
         }
       });
     },
-  },
-
-  update: {
-    configurable: true,
-    value: noop,
   },
 });
