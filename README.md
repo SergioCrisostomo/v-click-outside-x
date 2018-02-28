@@ -95,7 +95,7 @@ behave more like their native elements.
   <!-- the click event´s propagation will be stopped -->
   <div v-click-outside.stop="doThis"></div>
   
-  <!-- the click event's default will be stopped -->
+  <!-- the click event´s default will be stopped -->
   <div v-click-outside.prevent="doThat"></div>
   
   <!-- modifiers can be chained -->
