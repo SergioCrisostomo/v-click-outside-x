@@ -4,7 +4,7 @@
  * @see {@link https://webpack.js.org/} for further information.
  */
 
-require('babel-polyfill');
+require('@babel/polyfill');
 const path = require('path');
 const merge = require('webpack-merge');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');

@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import clickOutside from '../dist/v-click-outside-x';
 
 const plugin = clickOutside;
