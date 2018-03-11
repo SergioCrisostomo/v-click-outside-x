@@ -4,15 +4,17 @@
  * @see {@link https://webpack.js.org/} for further information.
  */
 
+require('babel-polyfill');
 const path = require('path');
-const webpack = require('webpack');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const merge = require('webpack-merge');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const {
   BundleAnalyzerPlugin,
 } = require('webpack-bundle-analyzer');
-const assign = require('lodash/assign');
-const compact = require('lodash/compact');
+
+const filename = 'v-click-outside-x';
+const library = 'vClickOutside';
+const dist = path.resolve(__dirname, 'dist');
 
 /**
  * The NODE_ENV environment variable.
@@ -47,13 +49,11 @@ const DEFAULT_EXCLUDE_RX = /node_modules/;
  * @see {@link https://webpack.js.org/guides/environment-variables/}
  */
 module.exports = function generateConfig(env) {
-  const ENV = assign({}, {
+  const ENV = merge({
     report: false,
   }, env);
 
-  return {
-    context: path.resolve(__dirname, '.'),
-
+  const base = {
     /**
      * This option controls if and how source maps are generated.
      *
@@ -79,9 +79,9 @@ module.exports = function generateConfig(env) {
      * @type {array.<string>}
      * @see {@link https://webpack.js.org/concepts/entry-points/}
      */
-    entry: [path.join(__dirname, 'src/index.js')],
+    entry: './index.js',
 
-    // mode: NODE_ENV === PRODUCTION ? PRODUCTION : DEVELOPMENT,
+    mode: NODE_ENV === PRODUCTION ? PRODUCTION : DEVELOPMENT,
 
     /**
      * In modular programming, developers break programs up into discrete chunks of functionality
@@ -99,7 +99,7 @@ module.exports = function generateConfig(env) {
      */
     module: {
       rules: [
-      /**
+        /**
          * eslint-loader options.
          * @type {!Object}
          * @see {@link https://github.com/MoOx/eslint-loader}
@@ -121,21 +121,12 @@ module.exports = function generateConfig(env) {
 
         /**
          * This package allows transpiling JavaScript files using Babel and webpack.
-         * @type {!Object}
+         *
          * @see {@link https://webpack.js.org/loaders/babel-loader/}
          */
         {
           exclude: DEFAULT_EXCLUDE_RX,
           loader: 'babel-loader',
-          options: {
-            plugins: ['lodash'],
-            presets: [['env', {
-              modules: false,
-              targets: {
-                node: 8,
-              },
-            }]],
-          },
           test: /\.js$/,
         },
       ],
@@ -160,10 +151,9 @@ module.exports = function generateConfig(env) {
      * @see {@link https://webpack.js.org/configuration/output/}
      */
     output: {
-      filename: 'v-click-outside-x.js',
-      library: 'vClickOutside',
+      library,
       libraryTarget: 'umd',
-      path: path.resolve(__dirname, 'dist'),
+      path: dist,
     },
 
     /**
@@ -173,61 +163,8 @@ module.exports = function generateConfig(env) {
      * A webpack plugin is a JavaScript object that has an apply property. This apply property
      * is called by the webpack compiler, giving access to the entire compilation lifecycle.
      *
-     * @type {array.<!Object>}
      */
-    plugins: compact([
-    /**
-       * Use the shorthand version.
-       * @type {!Object}
-       * @see {@link https://webpack.js.org/plugins/environment-plugin/}
-       */
-      new webpack.EnvironmentPlugin({
-        DEBUG: false, // use 'false' unless process.env.DEBUG is defined.
-        NODE_ENV: DEVELOPMENT, // use 'development' unless process.env.NODE_ENV is defined.
-      }),
-
-      /**
-       * Smaller lodash builds. We are not opting in to path feature.
-       * @type {!Object}
-       * @see {@link https://github.com/lodash/lodash-webpack-plugin}
-       */
-      new LodashModuleReplacementPlugin({
-        paths: true,
-      }),
-
-      /**
-       * This plugin uses UglifyJS v3 (uglify-es) to minify your JavaScript.
-       * @type {!Object}
-       * @see {@link https://webpack.js.org/plugins/uglifyjs-webpack-plugin/}
-       */
-      (function uglifyJs() {
-        if (NODE_ENV === PRODUCTION) {
-          return new webpack.optimize.UglifyJsPlugin({
-            parallel: true,
-            sourceMap: true,
-            uglifyOptions: {
-              ecma: 8,
-            },
-          });
-        }
-
-        return undefined;
-      }()),
-
-      /**
-       * Webpack plugin and CLI utility that represents bundle content as convenient
-       * interactive zoomable treemap.
-       * @type {!Object}
-       * @see {@link https://github.com/webpack-contrib/webpack-bundle-analyzer}
-       */
-      (function bundleAnalyzer() {
-        if (ENV.report) {
-          return new BundleAnalyzerPlugin();
-        }
-
-        return undefined;
-      }),
-    ]),
+    plugins: [],
 
     /**
      * These options change how modules are resolved.
@@ -235,16 +172,39 @@ module.exports = function generateConfig(env) {
      * @see {@link https://webpack.js.org/configuration/resolve/}
      */
     resolve: {
-    /**
+      /**
        * Create aliases to import or require certain modules more easily.
        * @type {!Object}
        * @see {@link https://webpack.js.org/configuration/resolve/#resolve-alias}
        */
-      alias: {
-        RootDir: path.resolve(__dirname, '.'),
-        src: path.resolve(__dirname, 'src'),
-      },
+      alias: {},
       extensions: ['.js', '.json'],
     },
   };
+
+  const packed = merge(base, {
+    optimization: {
+      minimize: false,
+    },
+
+    output: {
+      filename: `${filename}.js`,
+    },
+  });
+
+  const minified = merge(base, {
+    output: {
+      filename: `${filename}.min.js`,
+    },
+
+    /**
+     * Webpack plugin and CLI utility that represents bundle content as convenient
+     * interactive zoomable treemap.
+     *
+     * @see {@link https://github.com/webpack-contrib/webpack-bundle-analyzer}
+     */
+    plugins: ENV.report ? [new BundleAnalyzerPlugin()] : [],
+  });
+
+  return [packed, minified];
 };

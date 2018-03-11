@@ -58,3 +58,6 @@ npm-debug.log
 
 # Apple macOS
 .DS_Store
+
+# coverage results
+__tests__/coverage/

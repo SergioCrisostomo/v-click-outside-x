@@ -18,12 +18,10 @@
       },
       "useBuiltIns": "usage",
       "debug": false
-    }],
-    "stage-2"
+    }]
   ],
   "plugins": [
     "dynamic-import-node",
-    "lodash",
     "transform-class-properties",
     "transform-es5-property-mutators",
     "transform-export-extensions",

@@ -26,7 +26,6 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:promise/recommended',
-    'plugin:lodash/recommended',
     'plugin:css-modules/recommended',
   ],
 
@@ -80,7 +79,6 @@ module.exports = {
     'jest',
     'jsdoc',
     'json',
-    'lodash',
     'no-use-extend-native',
     'prefer-object-spread',
     'promise',
@@ -178,25 +176,6 @@ module.exports = {
     'jsdoc/require-param-type': 'warn',
     'jsdoc/require-returns-description': 'warn',
     'jsdoc/require-returns-type': 'warn',
-
-    /**
-     * ESLint rules for lodash.
-     * @see {@link https://github.com/wix/eslint-plugin-lodash}
-     */
-    'lodash/matches-prop-shorthand': 'off',
-    'lodash/matches-shorthand': 'off',
-    'lodash/prefer-constant': 'off',
-    'lodash/prefer-get': 'off',
-    'lodash/prefer-includes': 'off',
-    'lodash/prefer-is-nil': 'off',
-    'lodash/prefer-lodash-chain': 'off',
-    'lodash/prefer-lodash-method': 'off',
-    'lodash/prefer-lodash-typecheck': 'off',
-    'lodash/prefer-matches': 'off',
-    'lodash/prefer-noop': 'off',
-    'lodash/prefer-over-quantifier': 'off',
-    'lodash/prefer-some': 'off',
-    'lodash/prefer-startswith': 'off',
 
     /**
      * ESLint rule for suggesting that object spread properties be used.
