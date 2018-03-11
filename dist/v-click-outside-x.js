@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 86);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1738,42 +1738,13 @@ module.exports = { "default": __webpack_require__(83), __esModule: true };
 "use strict";
 
 
-exports.__esModule = true;
-
-var _assign = __webpack_require__(84);
-
-var _assign2 = _interopRequireDefault(_assign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _assign2.default || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(85);
+var _assign = __webpack_require__(84);
 
-var _extends3 = _interopRequireDefault(_extends2);
+var _assign2 = _interopRequireDefault(_assign);
 
 var _defineProperties = __webpack_require__(73);
 
@@ -1863,9 +1834,9 @@ exports.default = (0, _defineProperties2.default)({}, {
       }
 
       var arg = binding.arg || CLICK;
-      var normalisedBinding = (0, _extends3.default)({}, binding, {
+      var normalisedBinding = (0, _assign2.default)({}, binding, {
         arg: arg,
-        modifiers: (0, _extends3.default)({
+        modifiers: (0, _assign2.default)({
           capture: false,
           prevent: false,
           stop: false
@@ -1924,7 +1895,7 @@ exports.default = (0, _defineProperties2.default)({}, {
 });
 
 /***/ }),
-/* 87 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1934,7 +1905,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vClickOutside = __webpack_require__(86);
+var _vClickOutside = __webpack_require__(85);
 
 var _vClickOutside2 = _interopRequireDefault(_vClickOutside);
 

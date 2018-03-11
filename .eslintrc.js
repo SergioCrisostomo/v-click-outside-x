@@ -181,7 +181,7 @@ module.exports = {
      * ESLint rule for suggesting that object spread properties be used.
      * @see {@link https://github.com/bryanrsmith/eslint-plugin-prefer-object-spread}
      */
-    'prefer-object-spread/prefer-object-spread': 'error',
+    'prefer-object-spread/prefer-object-spread': 'off',
 
     /**
      * An ESLint rule for enforcing consistent ES6 class member order.

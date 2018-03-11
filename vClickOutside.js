@@ -65,16 +65,14 @@ export default Object.defineProperties({}, {
       }
 
       const arg = binding.arg || CLICK;
-      const normalisedBinding = {
-        ...binding,
+      const normalisedBinding = Object.assign({}, binding, {
         arg,
-        modifiers: {
+        modifiers: Object.assign({
           capture: false,
           prevent: false,
           stop: false,
-          ...binding.modifiers,
-        },
-      };
+        }, binding.modifiers),
+      });
 
       const useCapture = normalisedBinding.modifiers.capture;
       const instances = useCapture ? captureInstances : nonCaptureInstances;
