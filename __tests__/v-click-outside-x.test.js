@@ -18,12 +18,12 @@ describe('v-click-outside -> plugin', () => {
 
   it('$_captureInstances is an empty Map', () => {
     // expect(directive.$_captureInstances).toBeInstanceOf(Map);
-    expect(directive.$_captureInstances.size).toBe(0);
+    expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
   });
 
   it('$_nonCaptureInstances is an empty Map', () => {
     // expect(directive.$_nonCaptureInstances).toBeInstanceOf(Map);
-    expect(directive.$_nonCaptureInstances.size).toBe(0);
+    expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
   });
 
   it('$_onCaptureEvent to be a function', () => {
@@ -76,10 +76,10 @@ describe('v-click-outside -> directive', () => {
 
         directive.bind(div1, {value: eventHandler});
 
-        expect(directive.$_nonCaptureInstances.size).toBe(1);
-        expect(directive.$_nonCaptureInstances.has('click')).toBe(true);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances).toHaveProperty('click');
 
-        const clickInstances = directive.$_nonCaptureInstances.get('click');
+        const clickInstances = directive.$_nonCaptureInstances.click;
 
         expect(clickInstances).toBeInstanceOf(Array);
         expect(clickInstances).toHaveLength(1);
@@ -90,7 +90,7 @@ describe('v-click-outside -> directive', () => {
       it('removes from the list and event listener', () => {
         directive.unbind(div1);
 
-        expect(directive.$_nonCaptureInstances.size).toBe(0);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -106,10 +106,10 @@ describe('v-click-outside -> directive', () => {
         directive.bind(div1, {value: eventHandler1});
         directive.bind(div2, {arg: 'click', value: eventHandler2});
 
-        expect(directive.$_nonCaptureInstances.size).toBe(1);
-        expect(directive.$_nonCaptureInstances.has('click')).toBe(true);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances).toHaveProperty('click');
 
-        const clickInstances = directive.$_nonCaptureInstances.get('click');
+        const clickInstances = directive.$_nonCaptureInstances.click;
 
         expect(clickInstances).toBeInstanceOf(Array);
         expect(clickInstances).toHaveLength(2);
@@ -122,10 +122,10 @@ describe('v-click-outside -> directive', () => {
       it('removes from the list and the event listener', () => {
         directive.unbind(div1);
 
-        expect(directive.$_nonCaptureInstances.size).toBe(1);
-        expect(directive.$_nonCaptureInstances.has('click')).toBe(true);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances).toHaveProperty('click');
 
-        const clickInstances = directive.$_nonCaptureInstances.get('click');
+        const clickInstances = directive.$_nonCaptureInstances.click;
 
         expect(clickInstances).toBeInstanceOf(Array);
         expect(clickInstances).toHaveLength(1);
@@ -133,7 +133,7 @@ describe('v-click-outside -> directive', () => {
 
         directive.unbind(div2);
 
-        expect(directive.$_nonCaptureInstances.size).toBe(0);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
         expect(document.removeEventListener.mock.calls).toHaveLength(1);
       });
     });
@@ -150,10 +150,10 @@ describe('v-click-outside -> directive', () => {
         directive.bind(div2, {arg: 'pointerdown', modifiers: {stop: true}, value: eventHandler2});
         directive.bind(div3, {arg: 'pointerdown', modifiers: {prevent: true}, value: eventHandler2});
 
-        expect(directive.$_captureInstances.size).toBe(1);
-        expect(directive.$_captureInstances.has('pointerdown')).toBe(true);
+        expect(Object.keys(directive.$_captureInstances)).toHaveLength(1);
+        expect(directive.$_captureInstances).toHaveProperty('pointerdown');
 
-        const clickCaptureInstances = directive.$_captureInstances.get('pointerdown');
+        const clickCaptureInstances = directive.$_captureInstances.pointerdown;
 
         expect(clickCaptureInstances).toBeInstanceOf(Array);
         expect(clickCaptureInstances).toHaveLength(1);
@@ -171,10 +171,10 @@ describe('v-click-outside -> directive', () => {
           el: div1,
         });
 
-        expect(directive.$_nonCaptureInstances.size).toBe(1);
-        expect(directive.$_nonCaptureInstances.has('pointerdown')).toBe(true);
+        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
+        expect(directive.$_nonCaptureInstances).toHaveProperty('pointerdown');
 
-        const clickNonCaptureInstances = directive.$_nonCaptureInstances.get('pointerdown');
+        const clickNonCaptureInstances = directive.$_nonCaptureInstances.pointerdown;
 
         expect(clickNonCaptureInstances).toBeInstanceOf(Array);
         expect(clickNonCaptureInstances).toHaveLength(2);

@@ -1,6 +1,7 @@
+const has = Function.call.bind(Object.prototype.hasOwnProperty);
 const CLICK = 'click';
-const captureInstances = new Map();
-const nonCaptureInstances = new Map();
+const captureInstances = {};
+const nonCaptureInstances = {};
 const instancesList = [captureInstances, nonCaptureInstances];
 
 const commonHandler = function onCommonEvent(instances, event) {
@@ -8,8 +9,8 @@ const commonHandler = function onCommonEvent(instances, event) {
     target,
   } = event;
 
-  instances.forEach((instance) => {
-    instance.forEach(({el, binding}) => {
+  Object.keys(instances).forEach((eventName) => {
+    instances[eventName].forEach(({el, binding}) => {
       if (target !== el && !el.contains(target)) {
         if (binding.modifiers.stop) {
           event.stopPropagation();
@@ -76,11 +77,11 @@ export default Object.defineProperties({}, {
 
       const useCapture = normalisedBinding.modifiers.capture;
       const instances = useCapture ? captureInstances : nonCaptureInstances;
-      if (!instances.has(arg)) {
-        instances.set(arg, []);
+      if (!has(instances, arg)) {
+        instances[arg] = [];
       }
 
-      const typeList = instances.get(arg);
+      const typeList = instances[arg];
 
       typeList.push({el, binding: normalisedBinding});
 
@@ -95,19 +96,21 @@ export default Object.defineProperties({}, {
   unbind: {
     value: function unbind(el) {
       instancesList.forEach((instances) => {
-        if (instances.size > 0) {
+        const instanceKeys = Object.keys(instances);
+
+        if (instanceKeys.length > 0) {
           const useCapture = instances === captureInstances;
 
-          instances.forEach((instance, eventName) => {
-            const newInstance = instance.filter(directive => directive.el !== el);
+          instanceKeys.forEach((eventName) => {
+            const newInstance = instances[eventName].filter(directive => directive.el !== el);
 
-            if (newInstance.length === 0) {
+            if (newInstance.length < 1) {
               const eventHandler = useCapture ? captureEventHandler : nonCaptureEventHandler;
 
               document.removeEventListener(eventName, eventHandler, useCapture);
-              instances.delete(eventName);
+              delete instances[eventName]; // eslint-disable-line no-param-reassign
             } else {
-              instances.set(eventName, newInstance);
+              instances[eventName] = newInstance; // eslint-disable-line no-param-reassign
             }
           });
         }
