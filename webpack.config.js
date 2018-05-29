@@ -4,13 +4,12 @@
  * @see {@link https://webpack.js.org/} for further information.
  */
 
-require('@babel/polyfill');
+require('babel-polyfill');
 const path = require('path');
 const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
-const {
-  BundleAnalyzerPlugin,
-} = require('webpack-bundle-analyzer');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 const filename = 'v-click-outside-x';
 const library = 'vClickOutside';
@@ -20,9 +19,7 @@ const dist = path.resolve(__dirname, 'dist');
  * The NODE_ENV environment variable.
  * @type {!Object}
  */
-const {
-  NODE_ENV,
-} = process.env;
+const {NODE_ENV} = process.env;
 
 /**
  * The production string.
@@ -49,10 +46,6 @@ const DEFAULT_EXCLUDE_RX = /node_modules/;
  * @see {@link https://webpack.js.org/guides/environment-variables/}
  */
 module.exports = function generateConfig(env) {
-  const ENV = merge({
-    report: false,
-  }, env);
-
   const base = {
     /**
      * This option controls if and how source maps are generated.
@@ -72,14 +65,14 @@ module.exports = function generateConfig(env) {
      * @type {string}
      * @see {@link https://webpack.js.org/configuration/devtool/}
      */
-    devtool: NODE_ENV === PRODUCTION ? 'source-map' : 'eval-source-map',
+    devtool: 'source-map',
 
     /**
      * Define the entry points for the application.
      * @type {array.<string>}
      * @see {@link https://webpack.js.org/concepts/entry-points/}
      */
-    entry: './index.js',
+    entry: './src/index.js',
 
     mode: NODE_ENV === PRODUCTION ? PRODUCTION : DEVELOPMENT,
 
@@ -151,6 +144,7 @@ module.exports = function generateConfig(env) {
      * @see {@link https://webpack.js.org/configuration/output/}
      */
     output: {
+      globalObject: 'this', // https://github.com/Xotic750/v-click-outside-x/issues/2
       library,
       libraryTarget: 'umd',
       path: dist,
@@ -182,7 +176,7 @@ module.exports = function generateConfig(env) {
     },
   };
 
-  const packed = merge(base, {
+  const browser = merge(base, {
     optimization: {
       minimize: false,
     },
@@ -192,7 +186,7 @@ module.exports = function generateConfig(env) {
     },
   });
 
-  const minified = merge(base, {
+  const minified = merge(browser, {
     output: {
       filename: `${filename}.min.js`,
     },
@@ -203,8 +197,18 @@ module.exports = function generateConfig(env) {
      *
      * @see {@link https://github.com/webpack-contrib/webpack-bundle-analyzer}
      */
-    plugins: ENV.report ? [new BundleAnalyzerPlugin()] : [],
+    plugins: [
+      new UglifyJsPlugin({
+        parallel: true,
+        sourceMap: true,
+        uglifyOptions: {
+          ecma: 5,
+        },
+      }),
+
+      ...(env && env.report ? [new BundleAnalyzerPlugin()] : []),
+    ],
   });
 
-  return [packed, minified];
+  return [browser, minified];
 };
