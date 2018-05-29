@@ -25,6 +25,7 @@ module.exports = {
     'plugin:eslint-comments/recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:prettier/recommended',
     'plugin:promise/recommended',
     'plugin:css-modules/recommended',
   ],
@@ -42,14 +43,19 @@ module.exports = {
    */
   overrides: [
     {
-      files: ['webpack.*.js', '__tests__/*.js'],
+      files: ['webpack.*.js', '__tests__/**/*.js'],
       rules: {
         'compat/compat': 'off',
         'global-require': 'off',
-        'import/no-extraneous-dependencies': ['error', {
-          devDependencies: true,
-        }],
+        'import/no-extraneous-dependencies': [
+          'error',
+          {
+            devDependencies: true,
+          },
+        ],
         'no-console': 'off',
+        'no-sparse-arrays': 'off',
+        'no-void': 'off',
       },
     },
   ],
@@ -59,10 +65,9 @@ module.exports = {
    */
   parserOptions: {
     ecmaFeatures: {
-      es6: true,
       impliedStrict: true,
     },
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     parser: 'babel-eslint',
     sourceType: 'module',
   },
@@ -81,6 +86,7 @@ module.exports = {
     'json',
     'no-use-extend-native',
     'prefer-object-spread',
+    'prettier',
     'promise',
     'sort-class-members',
   ],
@@ -98,9 +104,6 @@ module.exports = {
      * Eslint rules that differ from airbnb base.
      * @see {@link https://eslint.org/docs/rules/}
      */
-    'global-require': 'warn',
-    'max-len': ['error', 130],
-    'object-curly-spacing': 'off',
 
     /**
      * Additional ESLint rules for ESLint's directive-comments.
@@ -118,7 +121,7 @@ module.exports = {
      * @see {@link https://github.com/babel/eslint-plugin-babel}
      */
     'babel/new-cap': 'error',
-    'babel/no-invalid-this': 'off',
+    'babel/no-invalid-this': 'error',
     'babel/object-curly-spacing': 'error',
     'babel/semi': 'error',
 
@@ -146,9 +149,12 @@ module.exports = {
      * ESLint plugin with rules that help validate proper imports.
      * @see {@link https://github.com/benmosher/eslint-plugin-import}
      */
-    'import/no-extraneous-dependencies': ['error', {
-      devDependencies: ['build/webpack.*.js'],
-    }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['webpack.*.js'],
+      },
+    ],
 
     /**
      * ESLint plugin for Jest.
@@ -164,13 +170,13 @@ module.exports = {
      * JSDoc specific linting rules for ESLint.
      * @see {@link https://github.com/gajus/eslint-plugin-jsdoc}
      */
+    'jsdoc/require-hyphen-before-param-description': 'warn',
     'jsdoc/check-param-names': 'warn',
-    'jsdoc/check-tag-names': 'warn',
     'jsdoc/check-types': 'warn',
     'jsdoc/newline-after-description': 'warn',
     'jsdoc/require-description-complete-sentence': 'warn',
     'jsdoc/require-example': 'off',
-    'jsdoc/require-hyphen-before-param-description': 'warn',
+    'jsdoc/check-tag-names': 'warn',
     'jsdoc/require-param': 'warn',
     'jsdoc/require-param-description': 'warn',
     'jsdoc/require-param-type': 'warn',
@@ -178,27 +184,36 @@ module.exports = {
     'jsdoc/require-returns-type': 'warn',
 
     /**
+     * ESLint rule for prettier.
+     * @see {@link https://prettier.io/docs/en/eslint.html}
+     */
+    'prettier/prettier': 'error',
+
+    /**
      * ESLint rule for suggesting that object spread properties be used.
      * @see {@link https://github.com/bryanrsmith/eslint-plugin-prefer-object-spread}
      */
-    'prefer-object-spread/prefer-object-spread': 'off',
+    'prefer-object-spread/prefer-object-spread': 'error',
 
     /**
      * An ESLint rule for enforcing consistent ES6 class member order.
      * @see {@link https://github.com/bryanrsmith/eslint-plugin-sort-class-members}
      */
-    'sort-class-members/sort-class-members': ['error', {
-      accessorPairPositioning: 'getThenSet',
-      order: [
-        '[static-properties]',
-        '[static-methods]',
-        '[properties]',
-        '[conventional-private-properties]',
-        'constructor',
-        '[methods]',
-        '[conventional-private-methods]',
-      ],
-    }],
+    'sort-class-members/sort-class-members': [
+      'error',
+      {
+        accessorPairPositioning: 'getThenSet',
+        order: [
+          '[static-properties]',
+          '[static-methods]',
+          '[properties]',
+          '[conventional-private-properties]',
+          'constructor',
+          '[methods]',
+          '[conventional-private-methods]',
+        ],
+      },
+    ],
   },
 
   /**
@@ -225,5 +240,4 @@ module.exports = {
       },
     },
   },
-
 };

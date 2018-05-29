@@ -2,13 +2,7 @@
 
 module.exports = {
   coverageDirectory: '__tests__/coverage/',
-  moduleFileExtensions: [
-    'js',
-    'json',
-  ],
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  testMatch: ['**/?(*.)(spec|test).js?(x)'],
+  collectCoverageFrom: ['<rootDir>/index.js'],
+  testMatch: ['**/*.test.js'],
   verbose: true,
 };
