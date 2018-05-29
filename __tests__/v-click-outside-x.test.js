@@ -1,6 +1,12 @@
-import * as vClickOutside from '../src';
+import ESM from '../src';
+import WEB from '../dist/v-click-outside-x';
+import MIN from '../dist/v-click-outside-x.min';
 
-const methods = [{method: vClickOutside, name: 'vClickOutside'}];
+const methods = [
+  {method: ESM, name: 'vClickOutside ESM'},
+  {method: WEB, name: 'vClickOutside WEB'},
+  {method: MIN, name: 'vClickOutside MIN'},
+];
 
 methods.forEach(({method, name}) => {
   const {directive, install} = method;

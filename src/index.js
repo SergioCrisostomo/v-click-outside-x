@@ -146,3 +146,8 @@ export const directive = Object.defineProperties(
 export function install(Vue) {
   Vue.directive('click-outside', directive);
 }
+
+export default {
+  directive,
+  install,
+};

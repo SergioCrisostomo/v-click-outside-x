@@ -1812,6 +1812,11 @@ function install(Vue) {
   Vue.directive('click-outside', directive);
 }
 
+exports.default = {
+  directive: directive,
+  install: install
+};
+
 /***/ })
 /******/ ]);
 });
