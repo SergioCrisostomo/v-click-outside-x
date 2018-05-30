@@ -4,7 +4,6 @@
  * @see {@link https://webpack.js.org/} for further information.
  */
 
-require('babel-polyfill');
 const path = require('path');
 const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');

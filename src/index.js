@@ -1,4 +1,3 @@
-const doc = typeof document === 'object' && document !== null && document;
 const CLICK = 'click';
 const captureInstances = Object.create(null);
 const nonCaptureInstances = Object.create(null);
@@ -10,7 +9,7 @@ const commonHandler = function _onCommonEvent(context, instances, event) {
   const itemIteratee = function _itemIteratee(item) {
     const {el} = item;
 
-    if (target !== el && !el.contains(target)) {
+    if (el !== target && !el.contains(target)) {
       const {binding} = item;
 
       if (binding.modifiers.stop) {
@@ -94,8 +93,12 @@ export const directive = Object.defineProperties(
         }
 
         if (instances[arg].push({el, binding: normalisedBinding}) === 1) {
-          if (doc) {
-            doc.addEventListener(arg, getEventHandler(useCapture), useCapture);
+          if (typeof document === 'object' && document) {
+            document.addEventListener(
+              arg,
+              getEventHandler(useCapture),
+              useCapture,
+            );
           }
         }
       },
@@ -120,8 +123,8 @@ export const directive = Object.defineProperties(
                 /* eslint-disable-next-line no-param-reassign */
                 instances[eventName] = newInstance;
               } else {
-                if (doc) {
-                  doc.removeEventListener(
+                if (typeof document === 'object' && document) {
+                  document.removeEventListener(
                     eventName,
                     getEventHandler(useCapture),
                     useCapture,
@@ -146,8 +149,3 @@ export const directive = Object.defineProperties(
 export function install(Vue) {
   Vue.directive('click-outside', directive);
 }
-
-export default {
-  directive,
-  install,
-};
