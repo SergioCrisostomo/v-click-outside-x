@@ -37,10 +37,10 @@ $ yarn add v-click-outside-x
 ## Use
 
 ```js
-import Vue from 'vue'
-import vClickOutside from 'v-click-outside-x'
+import Vue from 'vue';
+import * as vClickOutside from 'v-click-outside-x';
 
-Vue.use(vClickOutside)
+Vue.use(vClickOutside);
 ```
 
 ```js
@@ -62,7 +62,7 @@ Vue.use(vClickOutside)
 ## Directive
 
 ```js
-import vClickOutside from 'v-click-outside-x'
+import * as vClickOutside from 'v-click-outside-x'
 
 <script>
   export default {
@@ -84,8 +84,9 @@ import vClickOutside from 'v-click-outside-x'
 
 ## Event Modifiers
 
-It is not a very common need to call event.preventDefault() or event.stopPropagation()
-for click outside event handlers. Care should be taken when using these!
+It is not a very common need to call `event.preventDefault()`, `event.stopPropagation()` or
+`event.stopImmediatePropagation()` for click outside event handlers.
+Care should be taken when using these!
 
 The need for capture though, is reasonably common when you want menus or dropdown to
 behave more like their native elements.
@@ -94,13 +95,13 @@ behave more like their native elements.
 <template>
   <!-- the click event´s propagation will be stopped -->
   <div v-click-outside.stop="doThis"></div>
-  
+
   <!-- the click event´s default will be stopped -->
   <div v-click-outside.prevent="doThat"></div>
-  
+
   <!-- modifiers can be chained -->
-  <div v-click-outside.stop.prevent="doThat"></adiv
- 
+  <div v-click-outside.stop.prevent="doThat"></div>
+
   <!-- use capture mode when adding the event listener -->
   <div v-click-outside.capture="doThis"></div>
 </template>
@@ -128,7 +129,7 @@ the event type being bound by supplying an arguments, i.e. `pointerdown`.
 ```
 
 For support of the [PointerEvent API](https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent),
-consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pepjs). 
+consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pepjs).
 
 # Multiple Events Examples
 
@@ -150,7 +151,7 @@ consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pep
 </script>
 
 <template>
-  <div 
+  <div
     v-click-outside.capture="onClickOutside1"
     v-click-outside:click="onClickOutside2"
     v-click-outside:pointerdown.capture="onClickOutside3"
@@ -159,4 +160,5 @@ consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pep
 ```
 
 ## License
+
 [MIT License](https://github.com/ndelvalle/v-click-outside-x/blob/master/LICENSE)
