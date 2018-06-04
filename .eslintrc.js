@@ -58,6 +58,16 @@ module.exports = {
         'no-void': 'off',
       },
     },
+    {
+      files: ['webpack.*.js'],
+      rules: {
+        'func-names': 'off',
+        'no-new-func': 'off',
+        'no-restricted-globals': 'off',
+        'prefer-arrow-callback': 'off',
+        strict: 'off',
+      },
+    },
   ],
 
   /**

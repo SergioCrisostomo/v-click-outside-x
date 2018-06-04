@@ -20,6 +20,10 @@
     "transform-es5-property-mutators",
     "transform-export-extensions",
     "transform-object-rest-spread",
-    "transform-runtime"
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": false
+    }]
   ]
 }

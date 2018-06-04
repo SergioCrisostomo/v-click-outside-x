@@ -10,6 +10,21 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
+const getGlobal = function() {
+  'use strict';
+
+  if (typeof self !== 'undefined') {
+    return self;
+  }
+  if (typeof window !== 'undefined') {
+    return window;
+  }
+  if (typeof global !== 'undefined') {
+    return global;
+  }
+  return Function('return this')();
+};
+
 const filename = 'v-click-outside-x';
 const library = 'vClickOutside';
 const dist = path.resolve(__dirname, 'dist');
@@ -143,7 +158,8 @@ module.exports = function generateConfig(env) {
      * @see {@link https://webpack.js.org/configuration/output/}
      */
     output: {
-      globalObject: 'this', // https://github.com/Xotic750/v-click-outside-x/issues/2
+      // https://github.com/webpack/webpack/issues/6525
+      globalObject: `(${getGlobal.toString()}())`,
       library,
       libraryTarget: 'umd',
       path: dist,
