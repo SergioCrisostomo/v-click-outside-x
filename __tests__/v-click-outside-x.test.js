@@ -41,34 +41,48 @@ methods.forEach(({method, name, noDoc}) => {
       doc.removeEventListener = undefined;
     });
 
-    describe(`plugin`, () => {
+    describe('plugin', () => {
       it('the directive is an object', () => {
+        expect.assertions(1);
+
         expect(directive).toBeInstanceOf(Object);
       });
 
       it('it has all hook functions available', () => {
+        expect.assertions(2);
+
         ['bind', 'unbind'].forEach(functionName => {
           expect(directive[functionName]).toBeInstanceOf(Function);
         });
       });
 
       it('$_captureInstances is an empty Map', () => {
+        expect.assertions(1);
+
         expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
       });
 
       it('$_nonCaptureInstances is an empty Map', () => {
+        expect.assertions(1);
+
         expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
       });
 
       it('$_onCaptureEvent to be a function', () => {
+        expect.assertions(1);
+
         expect(directive.$_onCaptureEvent).toBeInstanceOf(Function);
       });
 
       it('$_onNonCaptureEvent to be a function', () => {
+        expect.assertions(1);
+
         expect(directive.$_onNonCaptureEvent).toBeInstanceOf(Function);
       });
 
       it('install the directive into the vue instance', () => {
+        expect.assertions(2);
+
         const vue = {
           directive: jest.fn(),
         };
@@ -80,10 +94,12 @@ methods.forEach(({method, name, noDoc}) => {
       });
     });
 
-    describe(`directive`, () => {
+    describe('directive', () => {
       describe('bind/unbind', () => {
         describe('bind exceptions', () => {
           it('throws an error if value is not a function', () => {
+            expect.assertions(1);
+
             const div1 = doc.createElement('div');
 
             const bindWithNoFunction = () => directive.bind(div1, {});
@@ -96,6 +112,8 @@ methods.forEach(({method, name, noDoc}) => {
           const div1 = doc.createElement('div');
 
           it('adds to the list and event listener', () => {
+            expect.assertions(6);
+
             const eventHandler = jest.fn();
 
             directive.bind(div1, {value: eventHandler});
@@ -114,6 +132,8 @@ methods.forEach(({method, name, noDoc}) => {
           });
 
           it('removes from the list and event listener', () => {
+            expect.assertions(2);
+
             directive.unbind(div1);
 
             expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(
@@ -128,6 +148,8 @@ methods.forEach(({method, name, noDoc}) => {
           const div2 = doc.createElement('div');
 
           it('adds to the list and event listener', () => {
+            expect.assertions(7);
+
             const eventHandler1 = jest.fn();
             const eventHandler2 = jest.fn();
 
@@ -150,6 +172,8 @@ methods.forEach(({method, name, noDoc}) => {
           });
 
           it('removes from the list and the event listener', () => {
+            expect.assertions(7);
+
             directive.unbind(div1);
 
             expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(
@@ -175,6 +199,8 @@ methods.forEach(({method, name, noDoc}) => {
 
         describe('bind', () => {
           it('saves the instance binding and element', () => {
+            expect.assertions(11);
+
             const div1 = doc.createElement('div');
             const div2 = doc.createElement('div');
             const div3 = doc.createElement('div');
@@ -277,6 +303,8 @@ methods.forEach(({method, name, noDoc}) => {
         div1.appendChild(span);
 
         it('calls the callback if the element is not the same and does not contain the event target', () => {
+          expect.assertions(10);
+
           const a = doc.createElement('a');
           const event = {
             preventDefault: jest.fn(),
@@ -318,6 +346,8 @@ methods.forEach(({method, name, noDoc}) => {
         });
 
         it('does not execute the callback if the event target its the element from the instance', () => {
+          expect.assertions(2);
+
           const event = {
             target: div1,
           };
@@ -334,6 +364,8 @@ methods.forEach(({method, name, noDoc}) => {
         });
 
         it('does not execute the callback if the event target is contained in the element from the instance', () => {
+          expect.assertions(2);
+
           const event = {
             target: span,
           };

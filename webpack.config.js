@@ -55,9 +55,9 @@ const DEFAULT_EXCLUDE_RX = /node_modules/;
 
 /**
  * Allows you to pass in as many environment variables as you like using --env.
+ * See {@link http://webpack.js.org/guides/environment-variables}.
  *
- * @param {!Object} env - The env object.
- * @see {@link https://webpack.js.org/guides/environment-variables/}
+ * @param {!Object} [env={}] - The env object.
  */
 module.exports = function generateConfig(env) {
   const base = {
