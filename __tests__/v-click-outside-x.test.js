@@ -234,7 +234,7 @@ methods.forEach(({method, name, noDoc}) => {
 
             expect(
               clickCaptureInstances.find(item => item.el === div1),
-            ).toEqual({
+            ).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {
@@ -262,7 +262,7 @@ methods.forEach(({method, name, noDoc}) => {
 
             expect(
               clickNonCaptureInstances.find(item => item.el === div2),
-            ).toEqual({
+            ).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {
@@ -277,7 +277,7 @@ methods.forEach(({method, name, noDoc}) => {
 
             expect(
               clickNonCaptureInstances.find(item => item.el === div3),
-            ).toEqual({
+            ).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {

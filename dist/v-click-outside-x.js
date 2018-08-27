@@ -236,14 +236,12 @@ var directive = exports.directive = Object.defineProperties({}, {
             var newInstance = instances[eventName].filter(compareElements);
 
             if (newInstance.length) {
-              /* eslint-disable-next-line no-param-reassign */
               instances[eventName] = newInstance;
             } else {
               if ((typeof document === 'undefined' ? 'undefined' : _typeof(document)) === 'object' && document) {
                 document.removeEventListener(eventName, getEventHandler(useCapture), useCapture);
               }
 
-              /* eslint-disable-next-line no-param-reassign */
               delete instances[eventName];
             }
           };

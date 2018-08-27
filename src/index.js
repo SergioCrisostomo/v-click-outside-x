@@ -120,7 +120,6 @@ export const directive = Object.defineProperties(
               const newInstance = instances[eventName].filter(compareElements);
 
               if (newInstance.length) {
-                /* eslint-disable-next-line no-param-reassign */
                 instances[eventName] = newInstance;
               } else {
                 if (typeof document === 'object' && document) {
@@ -131,7 +130,6 @@ export const directive = Object.defineProperties(
                   );
                 }
 
-                /* eslint-disable-next-line no-param-reassign */
                 delete instances[eventName];
               }
             };
