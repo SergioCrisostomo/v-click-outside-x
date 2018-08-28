@@ -6,9 +6,6 @@
         "loose": false,
         "modules": "commonjs",
         "spec": true,
-        "targets": {
-          "browsers": ["> 1%", "Explorer >= 9"]
-        },
         "useBuiltIns": false,
         "debug": false
       }
