@@ -117,12 +117,15 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 exports.install = install;
+exports.directive = void 0;
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var CLICK = 'click';
 var captureInstances = Object.create(null);
 var nonCaptureInstances = Object.create(null);
@@ -131,14 +134,11 @@ var instancesList = [captureInstances, nonCaptureInstances];
 var commonHandler = function _onCommonEvent(context, instances, event) {
   var target = event.target;
 
-
   var itemIteratee = function _itemIteratee(item) {
     var el = item.el;
 
-
     if (el !== target && !el.contains(target)) {
       var binding = item.binding;
-
 
       if (binding.modifiers.stop) {
         event.stopPropagation();
@@ -173,23 +173,19 @@ var getEventHandler = function _getEventHandler(useCapture) {
   return useCapture ? captureEventHandler : nonCaptureEventHandler;
 };
 
-var directive = exports.directive = Object.defineProperties({}, {
+var directive = Object.defineProperties({}, {
   $_captureInstances: {
     value: captureInstances
   },
-
   $_nonCaptureInstances: {
     value: nonCaptureInstances
   },
-
   $_onCaptureEvent: {
     value: captureEventHandler
   },
-
   $_onNonCaptureEvent: {
     value: nonCaptureEventHandler
   },
-
   bind: {
     value: function bind(el, binding) {
       if (typeof binding.value !== 'function') {
@@ -197,9 +193,10 @@ var directive = exports.directive = Object.defineProperties({}, {
       }
 
       var arg = binding.arg || CLICK;
-      var normalisedBinding = _extends({}, binding, {
+
+      var normalisedBinding = _objectSpread({}, binding, {
         arg: arg,
-        modifiers: _extends({
+        modifiers: _objectSpread({}, {
           capture: false,
           prevent: false,
           stop: false
@@ -208,18 +205,21 @@ var directive = exports.directive = Object.defineProperties({}, {
 
       var useCapture = normalisedBinding.modifiers.capture;
       var instances = useCapture ? captureInstances : nonCaptureInstances;
+
       if (!Array.isArray(instances[arg])) {
         instances[arg] = [];
       }
 
-      if (instances[arg].push({ el: el, binding: normalisedBinding }) === 1) {
-        if ((typeof document === 'undefined' ? 'undefined' : _typeof(document)) === 'object' && document) {
+      if (instances[arg].push({
+        el: el,
+        binding: normalisedBinding
+      }) === 1) {
+        if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
           document.addEventListener(arg, getEventHandler(useCapture), useCapture);
         }
       }
     }
   },
-
   unbind: {
     value: function unbind(el) {
       var compareElements = function _compareElements(item) {
@@ -238,7 +238,7 @@ var directive = exports.directive = Object.defineProperties({}, {
             if (newInstance.length) {
               instances[eventName] = newInstance;
             } else {
-              if ((typeof document === 'undefined' ? 'undefined' : _typeof(document)) === 'object' && document) {
+              if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
                 document.removeEventListener(eventName, getEventHandler(useCapture), useCapture);
               }
 
@@ -254,6 +254,7 @@ var directive = exports.directive = Object.defineProperties({}, {
     }
   }
 });
+exports.directive = directive;
 
 function install(Vue) {
   Vue.directive('click-outside', directive);

@@ -1,29 +1,30 @@
 {
   "presets": [
-    ["env", {
-      "loose": false,
-      "modules": "commonjs",
-      "spec": true,
-      "targets": {
-        "browsers": [
-          "> 1%",
-          "Explorer >= 9"
-        ]
-      },
-      "useBuiltIns": false,
-      "debug": false
-    }]
+    [
+      "@babel/preset-env",
+      {
+        "loose": false,
+        "modules": "commonjs",
+        "spec": true,
+        "targets": {
+          "browsers": ["> 1%", "Explorer >= 9"]
+        },
+        "useBuiltIns": false,
+        "debug": false
+      }
+    ]
   ],
   "plugins": [
-    "dynamic-import-node",
-    "transform-class-properties",
-    "transform-es5-property-mutators",
-    "transform-export-extensions",
-    "transform-object-rest-spread",
-    ["transform-runtime", {
-      "helpers": false,
-      "polyfill": false,
-      "regenerator": false
-    }]
+    "@babel/plugin-transform-property-mutators",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": false,
+        "helpers": false,
+        "regenerator": false,
+        "useESModules": false
+      }
+    ]
   ]
 }
