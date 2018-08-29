@@ -18,7 +18,7 @@
 <img src="https://badge.fury.io/js/v-click-outside-x.svg"
    alt="npm version" height="18"/>
 </a>
-<a name="module_regexp-escape-x"></a>
+<a name="v-click-outside-x"></a>
 
 # v-click-outside-x
 
