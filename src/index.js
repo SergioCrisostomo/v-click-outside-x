@@ -88,6 +88,7 @@ export const directive = Object.defineProperties(
 
         const useCapture = normalisedBinding.modifiers.capture;
         const instances = useCapture ? captureInstances : nonCaptureInstances;
+
         if (!Array.isArray(instances[arg])) {
           instances[arg] = [];
         }
