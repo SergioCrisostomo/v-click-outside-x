@@ -1,10 +1,11 @@
-import * as ESM from '../src/index';
-import * as WEB from '../dist/v-click-outside-x';
-import * as MIN from '../dist/v-click-outside-x.min';
+import PACKAGE_JSON from 'RootDir/package';
+import * as ESM from 'src/index';
+import * as WEB from 'dist/v-click-outside-x';
+import * as MIN from 'dist/v-click-outside-x.min';
 
-const ESMREQ = require('../src/index');
-const WEBREQ = require('../dist/v-click-outside-x');
-const MINREQ = require('../dist/v-click-outside-x.min');
+const ESMREQ = require('src/index');
+const WEBREQ = require('dist/v-click-outside-x');
+const MINREQ = require('dist/v-click-outside-x.min');
 
 const namePrefix = 'vClickOutside';
 const methods = [
@@ -78,6 +79,26 @@ methods.forEach(({method, name, noDoc}) => {
         expect.assertions(1);
 
         expect(directive.$_onNonCaptureEvent).toBeInstanceOf(Function);
+      });
+
+      it('version to be a string', () => {
+        expect.assertions(1);
+
+        expect(typeof directive.version).toStrictEqual('string');
+      });
+
+      it('version to be as per package.json', () => {
+        expect.assertions(1);
+
+        expect(directive.version).toStrictEqual(PACKAGE_JSON.version);
+      });
+
+      it('version to be enumerable', () => {
+        expect.assertions(1);
+
+        expect(
+          Object.prototype.propertyIsEnumerable.call(directive, 'version'),
+        ).toBeTruthy();
       });
 
       it('install the directive into the vue instance', () => {

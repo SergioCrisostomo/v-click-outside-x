@@ -5,8 +5,10 @@
  */
 
 const path = require('path');
+const childProcess = require('child_process');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
@@ -51,10 +53,13 @@ const PRODUCTION = 'production';
 const DEVELOPMENT = 'development';
 
 /**
- * The default exclude regex.
+ * The default include paths.
  * @type {string}
  */
-const DEFAULT_EXCLUDE_RX = /node_modules/;
+const DEFAULT_INCLUDE = [
+  path.resolve(__dirname, 'src'),
+  path.resolve(__dirname, '__tests__'),
+];
 
 /**
  * Allows you to pass in as many environment variables as you like using --env.
@@ -63,6 +68,28 @@ const DEFAULT_EXCLUDE_RX = /node_modules/;
  * @param {!Object} [env={}] - The env object.
  */
 module.exports = function generateConfig(env) {
+  /**
+   * The JSON content of `package.json`
+   * @type {!Object}
+   */
+  const PACKAGE = require('./package.json');
+
+  /**
+   * The reference created bu git describe --dirty`
+   * @type {string}
+   * @see {@link https://git-scm.com/docs/git-describe}
+   */
+  const DESCRIBE = childProcess
+    .spawnSync('git', ['describe', '--dirty'])
+    .output[1].toString()
+    .trim();
+
+  /**
+   * The date as of now.
+   * @type {string}
+   */
+  const NOW = new Date().toISOString();
+
   const base = {
     /**
      * This option controls if and how source maps are generated.
@@ -116,7 +143,7 @@ module.exports = function generateConfig(env) {
          */
         {
           enforce: 'pre',
-          exclude: DEFAULT_EXCLUDE_RX,
+          include: DEFAULT_INCLUDE,
           loader: 'eslint-loader',
           options: {
             emitError: true,
@@ -135,7 +162,7 @@ module.exports = function generateConfig(env) {
          * @see {@link https://webpack.js.org/loaders/babel-loader/}
          */
         {
-          exclude: DEFAULT_EXCLUDE_RX,
+          include: DEFAULT_INCLUDE,
           loader: 'babel-loader',
           test: /\.js$/,
         },
@@ -176,7 +203,30 @@ module.exports = function generateConfig(env) {
      * is called by the webpack compiler, giving access to the entire compilation lifecycle.
      *
      */
-    plugins: [],
+    plugins: [
+      /**
+       * Adds a banner to the top of each generated chunk.
+       * @type {!Object}
+       * @see {@link https://webpack.js.org/plugins/banner-plugin/}
+       */
+      new webpack.BannerPlugin({
+        banner: `/*!\n${JSON.stringify(
+          {
+            copywrite: `${PACKAGE.copyright}`,
+            date: `${NOW}`,
+            describe: `${DESCRIBE}`,
+            description: `${PACKAGE.description}`,
+            file: '[file]',
+            hash: '[hash]',
+            license: `${PACKAGE.license}`,
+            version: `${PACKAGE.version}`,
+          },
+          null,
+          2,
+        )}\n*/`,
+        raw: true,
+      }),
+    ],
 
     /**
      * These options change how modules are resolved.
@@ -189,7 +239,11 @@ module.exports = function generateConfig(env) {
        * @type {!Object}
        * @see {@link https://webpack.js.org/configuration/resolve/#resolve-alias}
        */
-      alias: {},
+      alias: {
+        RootDir: path.resolve(__dirname, '.'),
+        dist: path.resolve(__dirname, './dist'),
+        src: path.resolve(__dirname, './src'),
+      },
       extensions: ['.js', '.json'],
     },
   };
@@ -216,10 +270,10 @@ module.exports = function generateConfig(env) {
      * @see {@link https://github.com/webpack-contrib/webpack-bundle-analyzer}
      */
     plugins: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         parallel: true,
         sourceMap: true,
-        uglifyOptions: {
+        terserOptions: {
           ecma: 5,
         },
       }),

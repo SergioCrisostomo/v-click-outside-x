@@ -1,3 +1,15 @@
+/*!
+{
+  "copywrite": "Copyright (c) 2018-present",
+  "date": "2018-10-11T11:32:20.142Z",
+  "describe": "",
+  "description": "Vue directive to react on clicks outside an element.",
+  "file": "v-click-outside-x.js",
+  "hash": "6b8e903915d7141045b4",
+  "license": "MIT",
+  "version": "3.4.0"
+}
+*/
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -133,6 +145,13 @@ var CLICK = 'click';
 var captureInstances = Object.create(null);
 var nonCaptureInstances = Object.create(null);
 var instancesList = [captureInstances, nonCaptureInstances];
+/**
+ * The common event handler for bot capture and non-capture events.
+ *
+ * @param {!Object} context - The event context.
+ * @param {!Object} instances - The capture or non-capture registered instances.
+ * @param {Event} event - The event object.
+ */
 
 var commonHandler = function _onCommonEvent(context, instances, event) {
   var target = event.target;
@@ -161,20 +180,56 @@ var commonHandler = function _onCommonEvent(context, instances, event) {
 
   Object.keys(instances).forEach(keysIteratee);
 };
+/**
+ * Event handler for capture events.
+ *
+ * @param {Event} event - The event object.
+ */
+
 
 var captureEventHandler = function onCaptureEvent(event) {
   /* eslint-disable-next-line babel/no-invalid-this */
   commonHandler(this, captureInstances, event);
 };
+/**
+ * Event handler for non-capture events.
+ *
+ * @param {Event} event - The event object.
+ */
+
 
 var nonCaptureEventHandler = function onNonCaptureEvent(event) {
   /* eslint-disable-next-line babel/no-invalid-this */
   commonHandler(this, nonCaptureInstances, event);
 };
+/**
+ * Get the correct event handler: Capture or non-capture.
+ *
+ * @param {boolean} useCapture - Indicate which handler to use; 'true' to use
+ *  capture handler or 'false' for non-capture.
+ * @returns {Function} - The event handler.
+ */
+
 
 var getEventHandler = function _getEventHandler(useCapture) {
   return useCapture ? captureEventHandler : nonCaptureEventHandler;
 };
+/**
+ * The directive definition.
+ * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}
+ *
+ * @namespace
+ * @property {!Object} $_captureInstances - Registered capture instances.
+ * @property {!Object} $_nonCaptureInstances - Registered non-capture instances.
+ * @property {Function} $_onCaptureEvent - Event handler for capture events.
+ * @property {Function} $_onNonCaptureEvent - Event handler for non-capture events.
+ * @property {Function} bind - Called only once, when the directive is first
+ *  bound to the element.
+ * @property {Function} unbind - Called only once, when the directive is unbound
+ *  from the element.
+ * @property {string} version - The version number of this release.
+ */
+
 
 var directive = Object.defineProperties({}, {
   $_captureInstances: {
@@ -255,8 +310,29 @@ var directive = Object.defineProperties({}, {
 
       instancesList.forEach(instancesIteratee);
     }
+  },
+
+  /* Note: This needs to be manually updated to match package.json. */
+  version: {
+    enumerable: true,
+    value: '3.4.0'
   }
 });
+/**
+ * @typedef {Function} Vue - The constructor.
+ * @property {Function} directive - You can register a global custom directive
+ *  with the Vue.directive() method, passing in a directiveID followed by a
+ *  definition object.
+ */
+
+/**
+ * A Vue.js plugin should expose an install method. The method will be called
+ * with the Vue constructor as the first argument, along with possible options.
+ * {@link https://vuejs.org/v2/guide/plugins.html#Writing-a-Plugin|Writing a plugin}.
+ *
+ * @param {Vue} Vue - The Vue function.
+ */
+
 exports.directive = directive;
 
 function install(Vue) {

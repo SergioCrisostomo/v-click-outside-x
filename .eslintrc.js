@@ -26,18 +26,7 @@ module.exports = {
    * for files within the same directory has to be different.
    * @see {@link https://eslint.org/docs/user-guide/configuring#configuration-based-on-glob-patterns}
    */
-  overrides: [
-    {
-      files: ['webpack.*.js'],
-      rules: {
-        'func-names': 'off',
-        'no-new-func': 'off',
-        'no-restricted-globals': 'off',
-        'prefer-arrow-callback': 'off',
-        strict: 'off',
-      },
-    },
-  ],
+  overrides: [],
 
   /**
    * @see {@link https://eslint.org/docs/user-guide/configuring#specifying-parser-options}
