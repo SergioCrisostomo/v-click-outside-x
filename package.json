@@ -1,6 +1,6 @@
 {
   "name": "v-click-outside-x",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Vue directive to react on clicks outside an element.",
   "homepage": "https://github.com/Xotic750/v-click-outside-x.git",
   "repository": {
@@ -84,7 +84,7 @@
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "jest-file": "^1.0.0",
-    "prettier": "^1.15.1",
+    "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
     "semver": "^5.6.0",
     "terser-webpack-plugin": "^1.1.0",
