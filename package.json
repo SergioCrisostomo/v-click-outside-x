@@ -1,6 +1,6 @@
 {
   "name": "v-click-outside-x",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "Vue directive to react on clicks outside an element.",
   "homepage": "https://github.com/Xotic750/v-click-outside-x.git",
   "repository": {
@@ -52,7 +52,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/runtime": "^7.1.5",
-    "@prorenata/eslint-config-vue": "^1.8.3",
+    "@prorenata/eslint-config-vue": "^1.8.4",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
