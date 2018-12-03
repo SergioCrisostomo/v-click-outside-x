@@ -98,7 +98,7 @@ methods.forEach(({method, name, noDoc}) => {
 
         expect(
           Object.prototype.propertyIsEnumerable.call(directive, 'version'),
-        ).toBeTruthy();
+        ).toBe(true);
       });
 
       it('install the directive into the vue instance', () => {
