@@ -1,7 +1,7 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2018-12-03T22:21:33.592Z",
+  "date": "2018-12-03T22:22:42.624Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
