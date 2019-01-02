@@ -66,6 +66,7 @@ const DEFAULT_INCLUDE = [
  * See {@link http://webpack.js.org/guides/environment-variables}.
  *
  * @param {!Object} [env={}] - The env object.
+ * @returns {undefined} Default.
  */
 module.exports = function generateConfig(env) {
   /**

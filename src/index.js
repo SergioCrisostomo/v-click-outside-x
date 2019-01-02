@@ -9,6 +9,7 @@ const instancesList = [captureInstances, nonCaptureInstances];
  * @param {!Object} context - The event context.
  * @param {!Object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
+ * @returns {undefined} Default.
  */
 const commonHandler = function _onCommonEvent(context, instances, event) {
   const {target} = event;
@@ -185,7 +186,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '3.5.6',
+      value: '3.6.0',
     },
   },
 );

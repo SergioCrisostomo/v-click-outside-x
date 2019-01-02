@@ -1,13 +1,13 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2018-12-03T22:22:42.624Z",
+  "date": "2019-01-02T19:16:49.772Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "13d5bf6c1b16d0a8005b",
+  "hash": "ff4b5d7bd1e1178776e8",
   "license": "MIT",
-  "version": "3.5.6"
+  "version": "3.6.0"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -151,6 +151,7 @@ var instancesList = [captureInstances, nonCaptureInstances];
  * @param {!Object} context - The event context.
  * @param {!Object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
+ * @returns {undefined} Default.
  */
 
 var commonHandler = function _onCommonEvent(context, instances, event) {
@@ -315,7 +316,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '3.5.6'
+    value: '3.6.0'
   }
 });
 /**
