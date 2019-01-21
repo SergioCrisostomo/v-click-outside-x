@@ -186,7 +186,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '3.7.0',
+      value: '3.7.1',
     },
   },
 );
