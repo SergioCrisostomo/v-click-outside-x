@@ -1,13 +1,13 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-01-21T12:39:36.944Z",
+  "date": "2019-03-02T14:56:05.169Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "092bce160dbfe488bc08",
+  "hash": "21b0aa42ea4496984219",
   "license": "MIT",
-  "version": "3.7.1"
+  "version": "4.0.0"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -144,6 +144,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var CLICK = 'click';
 var captureInstances = Object.create(null);
 var nonCaptureInstances = Object.create(null);
+var captureEventHandlers = Object.create(null);
+var nonCaptureEventHandlers = Object.create(null);
 var instancesList = [captureInstances, nonCaptureInstances];
 /**
  * The common event handler for bot capture and non-capture events.
@@ -151,10 +153,11 @@ var instancesList = [captureInstances, nonCaptureInstances];
  * @param {!Object} context - The event context.
  * @param {!Object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
+ * @param {string} arg - The event type.
  * @returns {undefined} Default.
  */
 
-var commonHandler = function _onCommonEvent(context, instances, event) {
+var commonHandler = function _onCommonEvent(context, instances, event, arg) {
   var target = event.target;
 
   var itemIteratee = function _itemIteratee(item) {
@@ -175,45 +178,52 @@ var commonHandler = function _onCommonEvent(context, instances, event) {
     }
   };
 
-  var keysIteratee = function _keysIteratee(eventName) {
-    return instances[eventName].forEach(itemIteratee);
-  };
-
-  Object.keys(instances).forEach(keysIteratee);
-};
-/**
- * Event handler for capture events.
- *
- * @param {Event} event - The event object.
- */
-
-
-var captureEventHandler = function onCaptureEvent(event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
-  commonHandler(this, captureInstances, event);
-};
-/**
- * Event handler for non-capture events.
- *
- * @param {Event} event - The event object.
- */
-
-
-var nonCaptureEventHandler = function onNonCaptureEvent(event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
-  commonHandler(this, nonCaptureInstances, event);
+  instances[arg].forEach(itemIteratee);
 };
 /**
  * Get the correct event handler: Capture or non-capture.
  *
  * @param {boolean} useCapture - Indicate which handler to use; 'true' to use
  *  capture handler or 'false' for non-capture.
+ * @param {string} arg - The event type.
  * @returns {Function} - The event handler.
  */
 
 
-var getEventHandler = function _getEventHandler(useCapture) {
-  return useCapture ? captureEventHandler : nonCaptureEventHandler;
+var getEventHandler = function _getEventHandler(useCapture, arg) {
+  if (useCapture) {
+    if (captureEventHandlers[arg]) {
+      return captureEventHandlers[arg];
+    }
+    /**
+     * Event handler for capture events.
+     *
+     * @param {Event} event - The event object.
+     */
+
+
+    captureEventHandlers[arg] = function onCaptureEvent(event) {
+      commonHandler(this, captureInstances, event, arg);
+    };
+
+    return captureEventHandlers[arg];
+  }
+
+  if (nonCaptureEventHandlers[arg]) {
+    return nonCaptureEventHandlers[arg];
+  }
+  /**
+   * Event handler for non-capture events.
+   *
+   * @param {Event} event - The event object.
+   */
+
+
+  nonCaptureEventHandlers[arg] = function onNonCaptureEvent(event) {
+    commonHandler(this, nonCaptureInstances, event, arg);
+  };
+
+  return nonCaptureEventHandlers[arg];
 };
 /**
  * The directive definition.
@@ -239,11 +249,11 @@ var directive = Object.defineProperties({}, {
   $_nonCaptureInstances: {
     value: nonCaptureInstances
   },
-  $_onCaptureEvent: {
-    value: captureEventHandler
+  $_captureEventHandlers: {
+    value: captureEventHandlers
   },
-  $_onNonCaptureEvent: {
-    value: nonCaptureEventHandler
+  $_nonCaptureEventHandlers: {
+    value: nonCaptureEventHandlers
   },
   bind: {
     value: function bind(el, binding) {
@@ -274,7 +284,7 @@ var directive = Object.defineProperties({}, {
         binding: normalisedBinding
       }) === 1) {
         if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
-          document.addEventListener(arg, getEventHandler(useCapture), useCapture);
+          document.addEventListener(arg, getEventHandler(useCapture, arg), useCapture);
         }
       }
     }
@@ -298,7 +308,7 @@ var directive = Object.defineProperties({}, {
               instances[eventName] = newInstance;
             } else {
               if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
-                document.removeEventListener(eventName, getEventHandler(useCapture), useCapture);
+                document.removeEventListener(eventName, getEventHandler(useCapture, eventName), useCapture);
               }
 
               delete instances[eventName];
@@ -316,7 +326,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '3.7.1'
+    value: '4.0.0'
   }
 });
 /**

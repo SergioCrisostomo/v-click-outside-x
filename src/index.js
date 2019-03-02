@@ -1,6 +1,8 @@
 const CLICK = 'click';
 const captureInstances = Object.create(null);
 const nonCaptureInstances = Object.create(null);
+const captureEventHandlers = Object.create(null);
+const nonCaptureEventHandlers = Object.create(null);
 const instancesList = [captureInstances, nonCaptureInstances];
 
 /**
@@ -9,9 +11,10 @@ const instancesList = [captureInstances, nonCaptureInstances];
  * @param {!Object} context - The event context.
  * @param {!Object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
+ * @param {string} arg - The event type.
  * @returns {undefined} Default.
  */
-const commonHandler = function _onCommonEvent(context, instances, event) {
+const commonHandler = function _onCommonEvent(context, instances, event, arg) {
   const {target} = event;
 
   const itemIteratee = function _itemIteratee(item) {
@@ -32,31 +35,7 @@ const commonHandler = function _onCommonEvent(context, instances, event) {
     }
   };
 
-  const keysIteratee = function _keysIteratee(eventName) {
-    return instances[eventName].forEach(itemIteratee);
-  };
-
-  Object.keys(instances).forEach(keysIteratee);
-};
-
-/**
- * Event handler for capture events.
- *
- * @param {Event} event - The event object.
- */
-const captureEventHandler = function onCaptureEvent(event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
-  commonHandler(this, captureInstances, event);
-};
-
-/**
- * Event handler for non-capture events.
- *
- * @param {Event} event - The event object.
- */
-const nonCaptureEventHandler = function onNonCaptureEvent(event) {
-  /* eslint-disable-next-line babel/no-invalid-this */
-  commonHandler(this, nonCaptureInstances, event);
+  instances[arg].forEach(itemIteratee);
 };
 
 /**
@@ -64,10 +43,41 @@ const nonCaptureEventHandler = function onNonCaptureEvent(event) {
  *
  * @param {boolean} useCapture - Indicate which handler to use; 'true' to use
  *  capture handler or 'false' for non-capture.
+ * @param {string} arg - The event type.
  * @returns {Function} - The event handler.
  */
-const getEventHandler = function _getEventHandler(useCapture) {
-  return useCapture ? captureEventHandler : nonCaptureEventHandler;
+const getEventHandler = function _getEventHandler(useCapture, arg) {
+  if (useCapture) {
+    if (captureEventHandlers[arg]) {
+      return captureEventHandlers[arg];
+    }
+
+    /**
+     * Event handler for capture events.
+     *
+     * @param {Event} event - The event object.
+     */
+    captureEventHandlers[arg] = function onCaptureEvent(event) {
+      commonHandler(this, captureInstances, event, arg);
+    };
+
+    return captureEventHandlers[arg];
+  }
+
+  if (nonCaptureEventHandlers[arg]) {
+    return nonCaptureEventHandlers[arg];
+  }
+
+  /**
+   * Event handler for non-capture events.
+   *
+   * @param {Event} event - The event object.
+   */
+  nonCaptureEventHandlers[arg] = function onNonCaptureEvent(event) {
+    commonHandler(this, nonCaptureInstances, event, arg);
+  };
+
+  return nonCaptureEventHandlers[arg];
 };
 
 /**
@@ -96,12 +106,12 @@ export const directive = Object.defineProperties(
       value: nonCaptureInstances,
     },
 
-    $_onCaptureEvent: {
-      value: captureEventHandler,
+    $_captureEventHandlers: {
+      value: captureEventHandlers,
     },
 
-    $_onNonCaptureEvent: {
-      value: nonCaptureEventHandler,
+    $_nonCaptureEventHandlers: {
+      value: nonCaptureEventHandlers,
     },
 
     bind: {
@@ -137,7 +147,7 @@ export const directive = Object.defineProperties(
           if (typeof document === 'object' && document) {
             document.addEventListener(
               arg,
-              getEventHandler(useCapture),
+              getEventHandler(useCapture, arg),
               useCapture,
             );
           }
@@ -166,7 +176,7 @@ export const directive = Object.defineProperties(
                 if (typeof document === 'object' && document) {
                   document.removeEventListener(
                     eventName,
-                    getEventHandler(useCapture),
+                    getEventHandler(useCapture, eventName),
                     useCapture,
                   );
                 }
@@ -186,7 +196,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '3.7.1',
+      value: '4.0.0',
     },
   },
 );
