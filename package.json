@@ -26,7 +26,7 @@
     "report": "npm run build -- --env.report",
     "report:dev": "npm run build:dev -- --env.report",
     "security": "npm audit",
-    "security-fix": "npm run security -- --fix",
+    "security-fix": "npm run security -- fix",
     "start": "nodemon --exec \"npm run build\" --watch src",
     "test": "npm run clean:coverage && jest",
     "test:ci": "npm run test -- --ci --maxWorkers=2",
