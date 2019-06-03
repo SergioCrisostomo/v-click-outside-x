@@ -36,7 +36,7 @@ const dist = path.resolve(__dirname, 'dist');
 
 /**
  * The NODE_ENV environment variable.
- * @type {!Object}
+ * @type {!object}
  */
 const {NODE_ENV} = process.env;
 
@@ -65,13 +65,13 @@ const DEFAULT_INCLUDE = [
  * Allows you to pass in as many environment variables as you like using --env.
  * See {@link http://webpack.js.org/guides/environment-variables}.
  *
- * @param {!Object} [env={}] - The env object.
+ * @param {!object} [env={}] - The env object.
  * @returns {undefined} Default.
  */
 module.exports = function generateConfig(env) {
   /**
    * The JSON content of `package.json`
-   * @type {!Object}
+   * @type {!object}
    */
   const PACKAGE = require('./package.json');
 
@@ -139,7 +139,7 @@ module.exports = function generateConfig(env) {
       rules: [
         /**
          * eslint-loader options.
-         * @type {!Object}
+         * @type {!object}
          * @see {@link https://github.com/MoOx/eslint-loader}
          */
         {
@@ -185,7 +185,7 @@ module.exports = function generateConfig(env) {
     /**
      * Configuring the output configuration options tells webpack how to write the compiled
      * files to disk.
-     * @type {!Object}
+     * @type {!object}
      * @see {@link https://webpack.js.org/configuration/output/}
      */
     output: {
@@ -207,7 +207,7 @@ module.exports = function generateConfig(env) {
     plugins: [
       /**
        * Adds a banner to the top of each generated chunk.
-       * @type {!Object}
+       * @type {!object}
        * @see {@link https://webpack.js.org/plugins/banner-plugin/}
        */
       new webpack.BannerPlugin({
@@ -231,13 +231,13 @@ module.exports = function generateConfig(env) {
 
     /**
      * These options change how modules are resolved.
-     * @type {!Object}
+     * @type {!object}
      * @see {@link https://webpack.js.org/configuration/resolve/}
      */
     resolve: {
       /**
        * Create aliases to import or require certain modules more easily.
-       * @type {!Object}
+       * @type {!object}
        * @see {@link https://webpack.js.org/configuration/resolve/#resolve-alias}
        */
       alias: {

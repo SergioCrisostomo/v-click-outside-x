@@ -8,8 +8,8 @@ const instancesList = [captureInstances, nonCaptureInstances];
 /**
  * The common event handler for bot capture and non-capture events.
  *
- * @param {!Object} context - The event context.
- * @param {!Object} instances - The capture or non-capture registered instances.
+ * @param {!object} context - The event context.
+ * @param {!object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
  * @param {string} arg - The event type.
  * @returns {undefined} Default.
@@ -85,8 +85,8 @@ const getEventHandler = function _getEventHandler(useCapture, arg) {
  * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}
  *
  * @namespace
- * @property {!Object} $_captureInstances - Registered capture instances.
- * @property {!Object} $_nonCaptureInstances - Registered non-capture instances.
+ * @property {!object} $_captureInstances - Registered capture instances.
+ * @property {!object} $_nonCaptureInstances - Registered non-capture instances.
  * @property {Function} $_onCaptureEvent - Event handler for capture events.
  * @property {Function} $_onNonCaptureEvent - Event handler for non-capture events.
  * @property {Function} bind - Called only once, when the directive is first
