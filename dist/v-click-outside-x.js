@@ -1,13 +1,13 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-05-13T22:24:56.732Z",
+  "date": "2019-06-13T23:35:54.093Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "d6b587a172bf771ef080",
+  "hash": "8292519f4d250ba28e20",
   "license": "MIT",
-  "version": "4.0.3"
+  "version": "4.0.5"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -150,8 +150,8 @@ var instancesList = [captureInstances, nonCaptureInstances];
 /**
  * The common event handler for bot capture and non-capture events.
  *
- * @param {!Object} context - The event context.
- * @param {!Object} instances - The capture or non-capture registered instances.
+ * @param {!object} context - The event context.
+ * @param {!object} instances - The capture or non-capture registered instances.
  * @param {Event} event - The event object.
  * @param {string} arg - The event type.
  * @returns {undefined} Default.
@@ -230,8 +230,8 @@ var getEventHandler = function _getEventHandler(useCapture, arg) {
  * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}
  *
  * @namespace
- * @property {!Object} $_captureInstances - Registered capture instances.
- * @property {!Object} $_nonCaptureInstances - Registered non-capture instances.
+ * @property {!object} $_captureInstances - Registered capture instances.
+ * @property {!object} $_nonCaptureInstances - Registered non-capture instances.
  * @property {Function} $_onCaptureEvent - Event handler for capture events.
  * @property {Function} $_onNonCaptureEvent - Event handler for non-capture events.
  * @property {Function} bind - Called only once, when the directive is first
@@ -326,7 +326,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.3'
+    value: '4.0.5'
   }
 });
 /**

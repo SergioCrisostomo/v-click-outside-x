@@ -1,9 +1,6 @@
-import { PluginFunction, DirectiveOptions } from 'vue';
+import {PluginFunction, DirectiveOptions} from 'vue';
 
-declare var install: PluginFunction<any>;
-declare var directive: DirectiveOptions;
+declare const install: PluginFunction<void>;
+declare const directive: DirectiveOptions;
 
-export {
-  install,
-  directive
-};
+export {install, directive};
