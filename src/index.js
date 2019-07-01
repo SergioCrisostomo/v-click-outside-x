@@ -82,7 +82,7 @@ const getEventHandler = function _getEventHandler(useCapture, arg) {
 
 /**
  * The directive definition.
- * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}
+ * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}.
  *
  * @namespace
  * @property {!object} $_captureInstances - Registered capture instances.
@@ -196,7 +196,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '4.0.5',
+      value: '4.0.6',
     },
   },
 );

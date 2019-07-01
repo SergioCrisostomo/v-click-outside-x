@@ -1,13 +1,13 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-06-13T23:35:54.093Z",
+  "date": "2019-07-01T07:07:02.122Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "8292519f4d250ba28e20",
+  "hash": "604db66055d758503f8c",
   "license": "MIT",
-  "version": "4.0.5"
+  "version": "4.0.6"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -227,7 +227,7 @@ var getEventHandler = function _getEventHandler(useCapture, arg) {
 };
 /**
  * The directive definition.
- * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}
+ * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}.
  *
  * @namespace
  * @property {!object} $_captureInstances - Registered capture instances.
@@ -326,7 +326,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.5'
+    value: '4.0.6'
   }
 });
 /**
