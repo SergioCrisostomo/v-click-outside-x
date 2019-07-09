@@ -1,13 +1,13 @@
 /*!
 {
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-07-01T07:07:02.122Z",
+  "date": "2019-07-09T13:13:31.283Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "604db66055d758503f8c",
+  "hash": "f52e753c6efaa38f8cab",
   "license": "MIT",
-  "version": "4.0.6"
+  "version": "4.0.7"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -137,7 +137,9 @@ exports.directive = void 0;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { if (i % 2) { var source = arguments[i] != null ? arguments[i] : {}; ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i])); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(arguments[i], key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -263,13 +265,13 @@ var directive = Object.defineProperties({}, {
 
       var arg = binding.arg || CLICK;
 
-      var normalisedBinding = _objectSpread({}, binding, {
+      var normalisedBinding = _objectSpread({}, binding, {}, {
         arg: arg,
         modifiers: _objectSpread({}, {
           capture: false,
           prevent: false,
           stop: false
-        }, binding.modifiers)
+        }, {}, binding.modifiers)
       });
 
       var useCapture = normalisedBinding.modifiers.capture;
@@ -326,7 +328,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.6'
+    value: '4.0.7'
   }
 });
 /**
