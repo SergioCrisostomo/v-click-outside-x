@@ -9,8 +9,11 @@ const childProcess = require('child_process');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const camelCase = require('lodash/camelCase');
+const PACKAGE = require('./package.json');
 
 const getGlobal = function() {
   'use strict';
@@ -30,8 +33,8 @@ const getGlobal = function() {
   return Function('return this')();
 };
 
-const filename = 'v-click-outside-x';
-const library = 'vClickOutside';
+const filename = PACKAGE.name;
+const library = camelCase(filename);
 const dist = path.resolve(__dirname, 'dist');
 
 /**
@@ -73,13 +76,6 @@ const DEFAULT_INCLUDE = [
  * @returns {undefined} Default.
  */
 module.exports = function generateConfig(env) {
-  /**
-   * The JSON content of `package.json`.
-   *
-   * @type {!object}
-   */
-  const PACKAGE = require('./package.json');
-
   /**
    * The reference created bu git describe --dirty`.
    *
@@ -125,7 +121,7 @@ module.exports = function generateConfig(env) {
      * @type {Array.<string>}
      * @see {@link https://webpack.js.org/concepts/entry-points/}
      */
-    entry: './src/index.js',
+    entry: PACKAGE.module,
 
     mode: NODE_ENV === PRODUCTION ? PRODUCTION : DEVELOPMENT,
 
@@ -145,6 +141,17 @@ module.exports = function generateConfig(env) {
      */
     module: {
       rules: [
+        /**
+         * Extract sourceMappingURL comments from modules and offer it to webpack.
+         *
+         * @see {@link https://github.com/webpack-contrib/source-map-loader}
+         */
+        {
+          enforce: 'pre',
+          loader: 'source-map-loader',
+          test: /\.js$/,
+        },
+
         /**
          * Eslint-loader options.
          *
@@ -216,6 +223,27 @@ module.exports = function generateConfig(env) {
      */
     plugins: [
       /**
+       * Use the shorthand version.
+       *
+       * @type {!object}
+       * @see {@link https://webpack.js.org/plugins/environment-plugin/}
+       */
+      new webpack.EnvironmentPlugin({
+        DEBUG: false, // use 'false' unless process.env.DEBUG is defined.
+        NODE_ENV: DEVELOPMENT, // use 'development' unless process.env.NODE_ENV is defined.
+      }),
+
+      /**
+       * Smaller lodash builds. We are not opting in to path feature.
+       *
+       * @type {!object}
+       * @see {@link https://github.com/lodash/lodash-webpack-plugin}
+       */
+      new LodashModuleReplacementPlugin({
+        paths: true,
+      }),
+
+      /**
        * Adds a banner to the top of each generated chunk.
        *
        * @type {!object}
@@ -224,14 +252,15 @@ module.exports = function generateConfig(env) {
       new webpack.BannerPlugin({
         banner: `/*!\n${JSON.stringify(
           {
-            copywrite: `${PACKAGE.copyright}`,
-            date: `${NOW}`,
-            describe: `${DESCRIBE}`,
-            description: `${PACKAGE.description}`,
+            author: PACKAGE.author.name,
+            copywrite: PACKAGE.copyright,
+            date: NOW,
+            describe: DESCRIBE,
+            description: PACKAGE.description,
             file: '[file]',
             hash: '[hash]',
-            license: `${PACKAGE.license}`,
-            version: `${PACKAGE.version}`,
+            license: PACKAGE.license,
+            version: PACKAGE.version,
           },
           null,
           2,

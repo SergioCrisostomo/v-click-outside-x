@@ -1,3 +1,7 @@
+/**
+ * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
+ */
+
 const CLICK = 'click';
 const captureInstances = Object.create(null);
 const nonCaptureInstances = Object.create(null);
@@ -84,7 +88,7 @@ const getEventHandler = function _getEventHandler(useCapture, arg) {
  * The directive definition.
  * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}.
  *
- * @namespace
+ * @type {VClickOutsidePlugin.directive}
  * @property {!object} $_captureInstances - Registered capture instances.
  * @property {!object} $_nonCaptureInstances - Registered non-capture instances.
  * @property {Function} $_onCaptureEvent - Event handler for capture events.
@@ -196,24 +200,18 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '4.0.8',
+      value: '4.0.9',
     },
   },
 );
-
-/**
- * @typedef {Function} Vue - The constructor.
- * @property {Function} directive - You can register a global custom directive
- *  with the Vue.directive() method, passing in a directiveID followed by a
- *  definition object.
- */
 
 /**
  * A Vue.js plugin should expose an install method. The method will be called
  * with the Vue constructor as the first argument, along with possible options.
  * {@link https://vuejs.org/v2/guide/plugins.html#Writing-a-Plugin|Writing a plugin}.
  *
- * @param {Vue} Vue - The Vue function.
+ * @type {VClickOutsidePlugin.install}
+ * @param {import("vue")} Vue - The Vue constructor.
  */
 export function install(Vue) {
   Vue.directive('click-outside', directive);

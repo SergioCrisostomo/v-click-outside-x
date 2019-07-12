@@ -1,5 +1,5 @@
 import PACKAGE_JSON from 'RootDir/package';
-import {directive, install} from 'src/index';
+import {directive, install} from 'src/v-click-outside-x';
 
 const doc = window.document;
 
