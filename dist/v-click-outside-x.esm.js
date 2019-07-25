@@ -194,7 +194,7 @@ export var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.12'
+    value: '4.0.13'
   }
 });
 /**
