@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-07-25T22:23:23.854Z",
+  "date": "2019-07-26T23:39:05.541Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "abb01dfbf051a35dfec6",
+  "hash": "ae6d0004f5f9ad016bbb",
   "license": "MIT",
-  "version": "4.0.13"
+  "version": "4.0.14"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -327,7 +327,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.13'
+    value: '4.0.14'
   }
 });
 /**
