@@ -5,7 +5,7 @@ exclude:
   - /dist/.*
   - /__tests__/coverage/.*
   - /__tests__/__snapshots__/.*
-  - .*/webpack\.config.js
+  - .*/webpack\.config\.js
   - .*/jest\.config\.js
   - .*/eslintrc\.js
 production:
