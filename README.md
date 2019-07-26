@@ -20,7 +20,7 @@
 </a>
 <a href="https://bettercodehub.com/results/Xotic750/v-click-outside-x"
     title="bettercodehub score">
-<img src="https://bettercodehub.com/edge/badge/Xotic750/${repoName}?branch=master"
+<img src="https://bettercodehub.com/edge/badge/Xotic750/v-click-outside-x?branch=master"
     alt="bettercodehub score" height="18">
 </a>
 
