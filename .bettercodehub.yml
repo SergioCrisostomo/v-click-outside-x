@@ -13,4 +13,4 @@ production:
     - /__tests__/.*
 test:
   include:
-    - /src/.*
+    - /__tests__/.*
