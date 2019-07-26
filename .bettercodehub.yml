@@ -8,9 +8,3 @@ exclude:
   - .*/webpack\.config\.js
   - .*/jest\.config\.js
   - .*/eslintrc\.js
-production:
-  exclude:
-    - /__tests__/.*
-test:
-  include:
-    - /__tests__/.*
