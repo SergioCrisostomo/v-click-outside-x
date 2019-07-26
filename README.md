@@ -18,6 +18,12 @@
 <img src="https://badge.fury.io/js/v-click-outside-x.svg"
    alt="npm version" height="18"/>
 </a>
+<a href="https://bettercodehub.com/results/Xotic750/v-click-outside-x
+    title="bettercodehub score">
+<img src="https://bettercodehub.com/edge/badge/Xotic750/${repoName}?branch=master"
+    alt="bettercodehub score" height="18">
+</a>
+
 <a name="v-click-outside-x"></a>
 
 # v-click-outside-x
