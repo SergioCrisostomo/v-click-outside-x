@@ -1,0 +1,16 @@
+component_depth: 1
+languages:
+  - javascript
+exclude:
+  - /dist/.*
+  - /__tests__/coverage/.*
+  - /__tests__/__snapshots__/.*
+  - .*/webpack\.config.js
+  - .*/jest\.config\.js
+  - .*/eslintrc\.js
+production:
+  exclude:
+    - /__tests__/.*
+test:
+  include:
+    - /src/.*
