@@ -301,7 +301,6 @@ describe('vClickOutside', () => {
 
         expect(eventHandler1).toHaveBeenCalledWith(event);
         expect(eventHandler1.mock.instances).toHaveLength(1);
-        // expect(eventHandler1.mock.instances[0]).toBe(directive);
 
         expect(event.preventDefault).not.toHaveBeenCalled();
         expect(event.stopPropagation).not.toHaveBeenCalled();
@@ -321,7 +320,6 @@ describe('vClickOutside', () => {
 
         expect(eventHandler2).toHaveBeenCalledWith(event);
         expect(eventHandler2.mock.instances).toHaveLength(1);
-        // expect(eventHandler2.mock.instances[0]).toBe(directive);
 
         expect(event.preventDefault).toHaveBeenCalled();
         expect(event.stopPropagation).toHaveBeenCalled();
