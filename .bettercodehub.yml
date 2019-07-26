@@ -1,6 +1,12 @@
 component_depth: 1
 languages:
   - javascript
+  production:
+    exclude:
+      - /__tests__/.*
+  test:
+    include:
+      - /__tests__/.*
 exclude:
   - /dist/.*
   - /__tests__/coverage/.*
