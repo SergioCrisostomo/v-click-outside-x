@@ -18,10 +18,10 @@ const instancesList = [captureInstances, nonCaptureInstances];
  * @param {string} arg - The event type.
  * @returns {undefined} Default.
  */
-const commonHandler = function _onCommonEvent(context, instances, event, arg) {
+const commonHandler = function onCommonEvent(context, instances, event, arg) {
   const {target} = event;
 
-  const itemIteratee = function _itemIteratee(item) {
+  const itemIteratee = function itemIteratee(item) {
     const {el} = item;
 
     if (el !== target && !el.contains(target)) {
@@ -50,7 +50,7 @@ const commonHandler = function _onCommonEvent(context, instances, event, arg) {
  * @param {string} arg - The event type.
  * @returns {Function} - The event handler.
  */
-const getEventHandler = function _getEventHandler(useCapture, arg) {
+const getEventHandler = function getEventHandler(useCapture, arg) {
   if (useCapture) {
     if (captureEventHandlers[arg]) {
       return captureEventHandlers[arg];
@@ -89,8 +89,8 @@ const getEventHandler = function _getEventHandler(useCapture, arg) {
  * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}.
  *
  * @type {VClickOutsidePlugin.directive}
- * @property {!object} $_captureInstances - Registered capture instances.
- * @property {!object} $_nonCaptureInstances - Registered non-capture instances.
+ * @property {!object} $captureInstances - Registered capture instances.
+ * @property {!object} $nonCaptureInstances - Registered non-capture instances.
  * @property {Function} $_onCaptureEvent - Event handler for capture events.
  * @property {Function} $_onNonCaptureEvent - Event handler for non-capture events.
  * @property {Function} bind - Called only once, when the directive is first
@@ -102,19 +102,19 @@ const getEventHandler = function _getEventHandler(useCapture, arg) {
 export const directive = Object.defineProperties(
   {},
   {
-    $_captureInstances: {
+    $captureInstances: {
       value: captureInstances,
     },
 
-    $_nonCaptureInstances: {
+    $nonCaptureInstances: {
       value: nonCaptureInstances,
     },
 
-    $_captureEventHandlers: {
+    $captureEventHandlers: {
       value: captureEventHandlers,
     },
 
-    $_nonCaptureEventHandlers: {
+    $nonCaptureEventHandlers: {
       value: nonCaptureEventHandlers,
     },
 
@@ -149,11 +149,7 @@ export const directive = Object.defineProperties(
 
         if (instances[arg].push({el, binding: normalisedBinding}) === 1) {
           if (typeof document === 'object' && document) {
-            document.addEventListener(
-              arg,
-              getEventHandler(useCapture, arg),
-              useCapture,
-            );
+            document.addEventListener(arg, getEventHandler(useCapture, arg), useCapture);
           }
         }
       },
@@ -161,28 +157,24 @@ export const directive = Object.defineProperties(
 
     unbind: {
       value: function unbind(el) {
-        const compareElements = function _compareElements(item) {
+        const compareElements = function compareElements(item) {
           return item.el !== el;
         };
 
-        const instancesIteratee = function _instancesIteratee(instances) {
+        const instancesIteratee = function instancesIteratee(instances) {
           const instanceKeys = Object.keys(instances);
 
           if (instanceKeys.length) {
             const useCapture = instances === captureInstances;
 
-            const keysIteratee = function _keysIteratee(eventName) {
+            const keysIteratee = function keysIteratee(eventName) {
               const newInstance = instances[eventName].filter(compareElements);
 
               if (newInstance.length) {
                 instances[eventName] = newInstance;
               } else {
                 if (typeof document === 'object' && document) {
-                  document.removeEventListener(
-                    eventName,
-                    getEventHandler(useCapture, eventName),
-                    useCapture,
-                  );
+                  document.removeEventListener(eventName, getEventHandler(useCapture, eventName), useCapture);
                 }
 
                 delete instances[eventName];
@@ -200,7 +192,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '4.0.14',
+      value: '4.0.15',
     },
   },
 );

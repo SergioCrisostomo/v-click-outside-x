@@ -63,10 +63,7 @@ const DEVELOPMENT = 'development';
  *
  * @type {string}
  */
-const DEFAULT_INCLUDE = [
-  path.resolve(__dirname, 'src'),
-  path.resolve(__dirname, '__tests__'),
-];
+const DEFAULT_INCLUDE = [path.resolve(__dirname, 'src'), path.resolve(__dirname, '__tests__')];
 
 /**
  * Allows you to pass in as many environment variables as you like using --env.

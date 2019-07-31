@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-07-26T23:39:05.541Z",
+  "date": "2019-07-31T17:42:01.813Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "ae6d0004f5f9ad016bbb",
+  "hash": "207bc2d3bc1d1b650c71",
   "license": "MIT",
-  "version": "4.0.14"
+  "version": "4.0.15"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -158,10 +158,10 @@ var instancesList = [captureInstances, nonCaptureInstances];
  * @returns {undefined} Default.
  */
 
-var commonHandler = function _onCommonEvent(context, instances, event, arg) {
+var commonHandler = function onCommonEvent(context, instances, event, arg) {
   var target = event.target;
 
-  var itemIteratee = function _itemIteratee(item) {
+  var itemIteratee = function itemIteratee(item) {
     var el = item.el;
 
     if (el !== target && !el.contains(target)) {
@@ -191,7 +191,7 @@ var commonHandler = function _onCommonEvent(context, instances, event, arg) {
  */
 
 
-var getEventHandler = function _getEventHandler(useCapture, arg) {
+var getEventHandler = function getEventHandler(useCapture, arg) {
   if (useCapture) {
     if (captureEventHandlers[arg]) {
       return captureEventHandlers[arg];
@@ -231,8 +231,8 @@ var getEventHandler = function _getEventHandler(useCapture, arg) {
  * {@link https://vuejs.org/v2/guide/custom-directive.html|Custom directive}.
  *
  * @type {VClickOutsidePlugin.directive}
- * @property {!object} $_captureInstances - Registered capture instances.
- * @property {!object} $_nonCaptureInstances - Registered non-capture instances.
+ * @property {!object} $captureInstances - Registered capture instances.
+ * @property {!object} $nonCaptureInstances - Registered non-capture instances.
  * @property {Function} $_onCaptureEvent - Event handler for capture events.
  * @property {Function} $_onNonCaptureEvent - Event handler for non-capture events.
  * @property {Function} bind - Called only once, when the directive is first
@@ -244,16 +244,16 @@ var getEventHandler = function _getEventHandler(useCapture, arg) {
 
 
 var directive = Object.defineProperties({}, {
-  $_captureInstances: {
+  $captureInstances: {
     value: captureInstances
   },
-  $_nonCaptureInstances: {
+  $nonCaptureInstances: {
     value: nonCaptureInstances
   },
-  $_captureEventHandlers: {
+  $captureEventHandlers: {
     value: captureEventHandlers
   },
-  $_nonCaptureEventHandlers: {
+  $nonCaptureEventHandlers: {
     value: nonCaptureEventHandlers
   },
   bind: {
@@ -292,17 +292,17 @@ var directive = Object.defineProperties({}, {
   },
   unbind: {
     value: function unbind(el) {
-      var compareElements = function _compareElements(item) {
+      var compareElements = function compareElements(item) {
         return item.el !== el;
       };
 
-      var instancesIteratee = function _instancesIteratee(instances) {
+      var instancesIteratee = function instancesIteratee(instances) {
         var instanceKeys = Object.keys(instances);
 
         if (instanceKeys.length) {
           var useCapture = instances === captureInstances;
 
-          var keysIteratee = function _keysIteratee(eventName) {
+          var keysIteratee = function keysIteratee(eventName) {
             var newInstance = instances[eventName].filter(compareElements);
 
             if (newInstance.length) {
@@ -327,7 +327,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.14'
+    value: '4.0.15'
   }
 });
 /**

@@ -13,7 +13,7 @@ module.exports = {
   /**
    * @see {@link https://eslint.org/docs/user-guide/configuring#extending-configuration-files}
    */
-  extends: ['@prorenata/eslint-config-vue'],
+  extends: ['@xotic750/eslint-config-recommended'],
 
   /**
    * You can define global variables here.

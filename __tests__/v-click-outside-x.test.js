@@ -29,28 +29,28 @@ describe('vClickOutside', () => {
       });
     });
 
-    it('$_captureInstances is an empty Object', () => {
+    it('$captureInstances is an empty Object', () => {
       expect.assertions(1);
 
-      expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+      expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
     });
 
-    it('$_nonCaptureInstances is an empty Object', () => {
+    it('$nonCaptureInstances is an empty Object', () => {
       expect.assertions(1);
 
-      expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
+      expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
     });
 
-    it('$_captureEventHandlers an empty Object', () => {
+    it('$captureEventHandlers an empty Object', () => {
       expect.assertions(1);
 
-      expect(Object.keys(directive.$_captureEventHandlers)).toHaveLength(0);
+      expect(Object.keys(directive.$captureEventHandlers)).toHaveLength(0);
     });
 
-    it('$_nonCaptureEventHandlers an empty Object', () => {
+    it('$nonCaptureEventHandlers an empty Object', () => {
       expect.assertions(1);
 
-      expect(Object.keys(directive.$_nonCaptureEventHandlers)).toHaveLength(0);
+      expect(Object.keys(directive.$nonCaptureEventHandlers)).toHaveLength(0);
     });
 
     it('version to be a string', () => {
@@ -68,9 +68,7 @@ describe('vClickOutside', () => {
     it('version to be enumerable', () => {
       expect.assertions(1);
 
-      expect(
-        Object.prototype.propertyIsEnumerable.call(directive, 'version'),
-      ).toBe(true);
+      expect(Object.prototype.propertyIsEnumerable.call(directive, 'version')).toBe(true);
     });
 
     it('install the directive into the vue instance', () => {
@@ -111,10 +109,10 @@ describe('vClickOutside', () => {
 
           directive.bind(div1, {value: eventHandler});
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
-          expect(directive.$_nonCaptureInstances).toHaveProperty('click');
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(1);
+          expect(directive.$nonCaptureInstances).toHaveProperty('click');
 
-          const clickInstances = directive.$_nonCaptureInstances.click;
+          const clickInstances = directive.$nonCaptureInstances.click;
 
           expect(clickInstances).toBeInstanceOf(Array);
           expect(clickInstances).toHaveLength(1);
@@ -127,7 +125,7 @@ describe('vClickOutside', () => {
 
           directive.unbind(div1);
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
           expect(doc.removeEventListener.mock.calls).toHaveLength(1);
         });
       });
@@ -145,10 +143,10 @@ describe('vClickOutside', () => {
           directive.bind(div1, {value: eventHandler1});
           directive.bind(div2, {arg: 'click', value: eventHandler2});
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
-          expect(directive.$_nonCaptureInstances).toHaveProperty('click');
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(1);
+          expect(directive.$nonCaptureInstances).toHaveProperty('click');
 
-          const clickInstances = directive.$_nonCaptureInstances.click;
+          const clickInstances = directive.$nonCaptureInstances.click;
 
           expect(clickInstances).toBeInstanceOf(Array);
           expect(clickInstances).toHaveLength(2);
@@ -163,10 +161,10 @@ describe('vClickOutside', () => {
 
           directive.unbind(div1);
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
-          expect(directive.$_nonCaptureInstances).toHaveProperty('click');
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(1);
+          expect(directive.$nonCaptureInstances).toHaveProperty('click');
 
-          const clickInstances = directive.$_nonCaptureInstances.click;
+          const clickInstances = directive.$nonCaptureInstances.click;
 
           expect(clickInstances).toBeInstanceOf(Array);
           expect(clickInstances).toHaveLength(1);
@@ -174,7 +172,7 @@ describe('vClickOutside', () => {
 
           directive.unbind(div2);
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
 
           expect(doc.removeEventListener.mock.calls).toHaveLength(1);
         });
@@ -206,18 +204,15 @@ describe('vClickOutside', () => {
             value: eventHandler2,
           });
 
-          expect(Object.keys(directive.$_captureInstances)).toHaveLength(1);
-          expect(directive.$_captureInstances).toHaveProperty('pointerdown');
+          expect(Object.keys(directive.$captureInstances)).toHaveLength(1);
+          expect(directive.$captureInstances).toHaveProperty('pointerdown');
 
-          const clickCaptureInstances =
-            directive.$_captureInstances.pointerdown;
+          const clickCaptureInstances = directive.$captureInstances.pointerdown;
 
           expect(clickCaptureInstances).toBeInstanceOf(Array);
           expect(clickCaptureInstances).toHaveLength(1);
 
-          expect(
-            clickCaptureInstances.find(item => item.el === div1),
-          ).toStrictEqual({
+          expect(clickCaptureInstances.find(item => item.el === div1)).toStrictEqual({
             binding: {
               arg: 'pointerdown',
               modifiers: {
@@ -230,18 +225,15 @@ describe('vClickOutside', () => {
             el: div1,
           });
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(1);
-          expect(directive.$_nonCaptureInstances).toHaveProperty('pointerdown');
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(1);
+          expect(directive.$nonCaptureInstances).toHaveProperty('pointerdown');
 
-          const clickNonCaptureInstances =
-            directive.$_nonCaptureInstances.pointerdown;
+          const clickNonCaptureInstances = directive.$nonCaptureInstances.pointerdown;
 
           expect(clickNonCaptureInstances).toBeInstanceOf(Array);
           expect(clickNonCaptureInstances).toHaveLength(2);
 
-          expect(
-            clickNonCaptureInstances.find(item => item.el === div2),
-          ).toStrictEqual({
+          expect(clickNonCaptureInstances.find(item => item.el === div2)).toStrictEqual({
             binding: {
               arg: 'pointerdown',
               modifiers: {
@@ -254,9 +246,7 @@ describe('vClickOutside', () => {
             el: div1,
           });
 
-          expect(
-            clickNonCaptureInstances.find(item => item.el === div3),
-          ).toStrictEqual({
+          expect(clickNonCaptureInstances.find(item => item.el === div3)).toStrictEqual({
             binding: {
               arg: 'pointerdown',
               modifiers: {
@@ -273,8 +263,8 @@ describe('vClickOutside', () => {
           directive.unbind(div2);
           directive.unbind(div3);
 
-          expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
-          expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+          expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
+          expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
         });
       });
     });
@@ -297,7 +287,7 @@ describe('vClickOutside', () => {
         const eventHandler1 = jest.fn();
 
         directive.bind(div1, {value: eventHandler1});
-        directive.$_nonCaptureEventHandlers.click(event);
+        directive.$nonCaptureEventHandlers.click(event);
 
         expect(eventHandler1).toHaveBeenCalledWith(event);
         expect(eventHandler1.mock.instances).toHaveLength(1);
@@ -306,8 +296,8 @@ describe('vClickOutside', () => {
         expect(event.stopPropagation).not.toHaveBeenCalled();
 
         directive.unbind(div1);
-        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
-        expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
 
         const eventHandler2 = jest.fn();
 
@@ -316,7 +306,7 @@ describe('vClickOutside', () => {
           modifiers: {capture: true, prevent: true, stop: true},
           value: eventHandler2,
         });
-        directive.$_captureEventHandlers.touchdown(event);
+        directive.$captureEventHandlers.touchdown(event);
 
         expect(eventHandler2).toHaveBeenCalledWith(event);
         expect(eventHandler2.mock.instances).toHaveLength(1);
@@ -325,8 +315,8 @@ describe('vClickOutside', () => {
         expect(event.stopPropagation).toHaveBeenCalled();
 
         directive.unbind(div1);
-        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
-        expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
       });
 
       it('does not execute the callback if the event target its the element from the instance', () => {
@@ -339,14 +329,14 @@ describe('vClickOutside', () => {
         const eventHandler = jest.fn();
 
         directive.bind(div1, {value: eventHandler});
-        directive.$_nonCaptureEventHandlers.click(event);
+        directive.$nonCaptureEventHandlers.click(event);
 
         expect(eventHandler).not.toHaveBeenCalled();
         expect(eventHandler.mock.instances).toHaveLength(0);
 
         directive.unbind(div1);
-        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
-        expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
       });
 
       it('does not execute the callback if the event target is contained in the element from the instance', () => {
@@ -359,14 +349,14 @@ describe('vClickOutside', () => {
         const eventHandler = jest.fn();
 
         directive.bind(div1, {value: eventHandler});
-        directive.$_nonCaptureEventHandlers.click(event);
+        directive.$nonCaptureEventHandlers.click(event);
 
         expect(eventHandler).not.toHaveBeenCalled();
         expect(eventHandler.mock.instances).toHaveLength(0);
 
         directive.unbind(div1);
-        expect(Object.keys(directive.$_nonCaptureInstances)).toHaveLength(0);
-        expect(Object.keys(directive.$_captureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$nonCaptureInstances)).toHaveLength(0);
+        expect(Object.keys(directive.$captureInstances)).toHaveLength(0);
       });
     });
   });

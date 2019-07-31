@@ -1,4 +1,6 @@
 !.eslintrc.js
-!jest.config.js
+!.prettierrc.json
+node_modules/
 dist/
 __tests__/coverage/
+package-lock.json
