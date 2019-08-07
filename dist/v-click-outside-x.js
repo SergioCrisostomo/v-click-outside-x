@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-07-31T17:42:01.813Z",
+  "date": "2019-08-07T21:17:53.380Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "207bc2d3bc1d1b650c71",
+  "hash": "0372740c8418f0a1b7e2",
   "license": "MIT",
-  "version": "4.0.15"
+  "version": "4.0.16"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -284,6 +284,7 @@ var directive = Object.defineProperties({}, {
         el: el,
         binding: normalisedBinding
       }) === 1) {
+        /* istanbul ignore next */
         if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
           document.addEventListener(arg, getEventHandler(useCapture, arg), useCapture);
         }
@@ -308,6 +309,7 @@ var directive = Object.defineProperties({}, {
             if (newInstance.length) {
               instances[eventName] = newInstance;
             } else {
+              /* istanbul ignore next */
               if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
                 document.removeEventListener(eventName, getEventHandler(useCapture, eventName), useCapture);
               }
@@ -327,7 +329,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.15'
+    value: '4.0.16'
   }
 });
 /**

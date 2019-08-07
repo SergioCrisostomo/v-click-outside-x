@@ -23,6 +23,12 @@
 <img src="https://bettercodehub.com/edge/badge/Xotic750/v-click-outside-x?branch=master"
     alt="bettercodehub score" height="18">
 </a>
+<a
+  href="https://coveralls.io/github/Xotic750/v-click-outside-x?branch=master"
+  title="Coverage Status">
+<img src="https://coveralls.io/repos/github/Xotic750/v-click-outside-x/badge.svg?branch=master"
+  alt="Coverage Status" height="18">
+</a>
 
 <a name="v-click-outside-x"></a>
 
@@ -49,14 +55,14 @@ import * as vClickOutside from 'v-click-outside-x';
 Vue.use(vClickOutside);
 ```
 
-```js
+```html
 <script>
   export default {
     methods: {
-      onClickOutside (event) {
-        console.log('Clicked outside. Event: ', event)
-      }
-    }
+      onClickOutside(event) {
+        console.log('Clicked outside. Event: ', event);
+      },
+    },
   };
 </script>
 
@@ -67,19 +73,17 @@ Vue.use(vClickOutside);
 
 ## Directive
 
-```js
-import * as vClickOutside from 'v-click-outside-x'
-
+```html
 <script>
   export default {
     directives: {
-      clickOutside: vClickOutside.directive
+      clickOutside: vClickOutside.directive,
     },
     methods: {
-      onClickOutside (event) {
-        console.log('Clicked outside. Event: ', event)
-      }
-    }
+      onClickOutside(event) {
+        console.log('Clicked outside. Event: ', event);
+      },
+    },
   };
 </script>
 
@@ -97,7 +101,7 @@ Care should be taken when using these!
 The need for capture though, is reasonably common when you want menus or dropdown to
 behave more like their native elements.
 
-```js
+```html
 <template>
   <!-- the click event´s propagation will be stopped -->
   <div v-click-outside.stop="doThis"></div>
@@ -118,14 +122,14 @@ behave more like their native elements.
 By default, if no argument is supplied then `click` will be used. You can specify
 the event type being bound by supplying an arguments, i.e. `pointerdown`.
 
-```js
+```html
 <script>
   export default {
     methods: {
-      onClickOutside (event) {
-        console.log('Clicked outside. Event: ', event)
-      }
-    }
+      onClickOutside(event) {
+        console.log('Clicked outside. Event: ', event);
+      },
+    },
   };
 </script>
 
@@ -139,20 +143,20 @@ consider loading the [Pointer Events Polyfill](https://www.npmjs.com/package/pep
 
 # Multiple Events Examples
 
-```js
+```html
 <script>
   export default {
     methods: {
-      onClickOutside1 (event) {
-        console.log('Clicked outside 1. Event: ', event)
+      onClickOutside1(event) {
+        console.log('Clicked outside 1. Event: ', event);
       },
-      onClickOutside2 (event) {
-        console.log('Clicked outside 2. Event: ', event)
+      onClickOutside2(event) {
+        console.log('Clicked outside 2. Event: ', event);
       },
-      onClickOutside3 (event) {
-        console.log('Clicked outside 3. Event: ', event)
-      }
-    }
+      onClickOutside3(event) {
+        console.log('Clicked outside 3. Event: ', event);
+      },
+    },
   };
 </script>
 

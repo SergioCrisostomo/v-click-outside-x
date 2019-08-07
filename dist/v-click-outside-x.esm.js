@@ -151,6 +151,7 @@ export var directive = Object.defineProperties({}, {
         el: el,
         binding: normalisedBinding
       }) === 1) {
+        /* istanbul ignore next */
         if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
           document.addEventListener(arg, getEventHandler(useCapture, arg), useCapture);
         }
@@ -175,6 +176,7 @@ export var directive = Object.defineProperties({}, {
             if (newInstance.length) {
               instances[eventName] = newInstance;
             } else {
+              /* istanbul ignore next */
               if ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' && document) {
                 document.removeEventListener(eventName, getEventHandler(useCapture, eventName), useCapture);
               }
@@ -194,7 +196,7 @@ export var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.15'
+    value: '4.0.16'
   }
 });
 /**
