@@ -13,25 +13,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const eslintFriendlyFormatter = require('eslint-friendly-formatter');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const camelCase = require('lodash/camelCase');
+const globalObject = require('webpack-global-object-x');
 const PACKAGE = require('./package.json');
-
-const getGlobal = function() {
-  'use strict';
-
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-
-  return Function('return this')();
-};
 
 const filename = PACKAGE.name;
 const library = camelCase(filename);
@@ -204,7 +187,7 @@ module.exports = function generateConfig(env) {
      */
     output: {
       // https://github.com/webpack/webpack/issues/6525
-      globalObject: `(${getGlobal.toString()}())`,
+      globalObject: `(${globalObject.toString()}())`,
       library,
       libraryTarget: 'umd',
       path: dist,
