@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`vClickOutside directive bind/unbind bind exceptions throws an error if value is not a function 1`] = `"Binding value must be a function."`;
+exports[`vClickOutside 0 directive bind/unbind bind exceptions throws an error if value is not a function 1`] = `"Binding value must be a function."`;
+
+exports[`vClickOutside 1 directive bind/unbind bind exceptions throws an error if value is not a function 1`] = `"Binding value must be a function."`;

@@ -1,7 +1,6 @@
 /**
  * @file Manages the root configuration settings for webpack.
- * @module webpack/root/configuration
- * @see {@link https://webpack.js.org/} for further information.
+ * @see {@link https://webpack.js.org/} For further information.
  */
 
 const path = require('path');
@@ -16,7 +15,7 @@ const camelCase = require('lodash/camelCase');
 const globalObject = require('webpack-global-object-x');
 const PACKAGE = require('./package.json');
 
-const filename = PACKAGE.name;
+const filename = PACKAGE.name.replace('@xotic750/', '');
 const library = camelCase(filename);
 const dist = path.resolve(__dirname, 'dist');
 

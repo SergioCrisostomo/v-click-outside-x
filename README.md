@@ -1,27 +1,39 @@
-<a href="https://travis-ci.org/Xotic750/v-click-outside-x"
-   title="Travis status">
+<a
+  href="https://travis-ci.org/Xotic750/v-click-outside-x"
+  title="Travis status">
 <img
-   src="https://travis-ci.org/Xotic750/v-click-outside-x.svg?branch=master"
-   alt="Travis status" height="18"/>
+  src="https://travis-ci.org/Xotic750/v-click-outside-x.svg?branch=master"
+  alt="Travis status" height="18">
 </a>
-<a href="https://david-dm.org/Xotic750/v-click-outside-x"
-   title="Dependency status">
-<img src="https://david-dm.org/Xotic750/v-click-outside-x.svg"
-   alt="Dependency status" height="18"/>
+<a
+  href="https://david-dm.org/Xotic750/v-click-outside-x"
+  title="Dependency status">
+<img src="https://david-dm.org/Xotic750/v-click-outside-x/status.svg"
+  alt="Dependency status" height="18"/>
 </a>
-<a href="https://david-dm.org/Xotic750/v-click-outside-x#info=devDependencies"
-   title="devDependency status">
+<a
+  href="https://david-dm.org/Xotic750/v-click-outside-x?type=dev"
+  title="devDependency status">
 <img src="https://david-dm.org/Xotic750/v-click-outside-x/dev-status.svg"
-   alt="devDependency status" height="18"/>
+  alt="devDependency status" height="18"/>
 </a>
-<a href="https://badge.fury.io/js/v-click-outside-x" title="npm version">
+<a
+  href="https://badge.fury.io/js/v-click-outside-x"
+  title="npm version">
 <img src="https://badge.fury.io/js/v-click-outside-x.svg"
-   alt="npm version" height="18"/>
+  alt="npm version" height="18">
 </a>
-<a href="https://bettercodehub.com/results/Xotic750/v-click-outside-x"
-    title="bettercodehub score">
+<a
+  href="https://www.jsdelivr.com/package/npm/v-click-outside-x"
+  title="jsDelivr hits">
+<img src="https://data.jsdelivr.com/v1/package/npm/v-click-outside-x/badge?style=rounded"
+  alt="jsDelivr hits" height="18">
+</a>
+<a
+  href="https://bettercodehub.com/results/Xotic750/v-click-outside-x"
+  title="bettercodehub score">
 <img src="https://bettercodehub.com/edge/badge/Xotic750/v-click-outside-x?branch=master"
-    alt="bettercodehub score" height="18">
+  alt="bettercodehub score" height="18">
 </a>
 <a
   href="https://coveralls.io/github/Xotic750/v-click-outside-x?branch=master"

@@ -1,3 +1,5 @@
+import {version} from '../package.json';
+
 /**
  * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
  */
@@ -194,7 +196,7 @@ export const directive = Object.defineProperties(
     /* Note: This needs to be manually updated to match package.json. */
     version: {
       enumerable: true,
-      value: '4.0.17',
+      value: version,
     },
   },
 );

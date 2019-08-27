@@ -6,9 +6,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+import { version } from '../package.json';
 /**
  * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
  */
+
 var CLICK = 'click';
 var captureInstances = Object.create(null);
 var nonCaptureInstances = Object.create(null);
@@ -196,7 +198,7 @@ export var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: '4.0.17'
+    value: version
   }
 });
 /**
