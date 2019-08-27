@@ -1,7 +1,6 @@
 /**
  * @file Manages the root configuration settings for project wide eslint.
- * @module eslint/root/configuration
- * @see {@link https://eslint.org} for further information.
+ * @see {@link https://eslint.org} For further information.
  */
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
    * @see {@link https://eslint.org/docs/user-guide/configuring#specifying-environments}
    */
   env: {},
-
   /**
    * @see {@link https://eslint.org/docs/user-guide/configuring#extending-configuration-files}
    */
@@ -48,7 +46,9 @@ module.exports = {
   /**
    * @see {@link https://eslint.org/docs/user-guide/configuring#configuring-rules}
    */
-  rules: {},
+  rules: {
+    'max-classes-per-file': 'off',
+  },
 
   /**
    * Webpack-literate module resolution plugin for eslint-plugin-import.

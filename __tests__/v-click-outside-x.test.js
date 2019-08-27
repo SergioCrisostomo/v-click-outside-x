@@ -26,7 +26,7 @@ const doc = window.document;
       it('it has all hook functions available', () => {
         expect.assertions(2);
 
-        ['bind', 'unbind'].forEach(functionName => {
+        ['bind', 'unbind'].forEach((functionName) => {
           expect(directive[functionName]).toBeInstanceOf(Function);
         });
       });
@@ -118,7 +118,7 @@ const doc = window.document;
 
             expect(clickInstances).toBeInstanceOf(Array);
             expect(clickInstances).toHaveLength(1);
-            expect(clickInstances.find(item => item.el === div1)).toBeDefined();
+            expect(clickInstances.find((item) => item.el === div1)).toBeDefined();
             expect(doc.addEventListener.mock.calls).toHaveLength(1);
           });
 
@@ -153,8 +153,8 @@ const doc = window.document;
             expect(clickInstances).toBeInstanceOf(Array);
             expect(clickInstances).toHaveLength(2);
 
-            expect(clickInstances.find(item => item.el === div1)).toBeDefined();
-            expect(clickInstances.find(item => item.el === div2)).toBeDefined();
+            expect(clickInstances.find((item) => item.el === div1)).toBeDefined();
+            expect(clickInstances.find((item) => item.el === div2)).toBeDefined();
             expect(doc.addEventListener.mock.calls).toHaveLength(1);
           });
 
@@ -170,7 +170,7 @@ const doc = window.document;
 
             expect(clickInstances).toBeInstanceOf(Array);
             expect(clickInstances).toHaveLength(1);
-            expect(clickInstances.find(item => item.el === div2)).toBeDefined();
+            expect(clickInstances.find((item) => item.el === div2)).toBeDefined();
 
             directive.unbind(div2);
 
@@ -214,7 +214,7 @@ const doc = window.document;
             expect(clickCaptureInstances).toBeInstanceOf(Array);
             expect(clickCaptureInstances).toHaveLength(1);
 
-            expect(clickCaptureInstances.find(item => item.el === div1)).toStrictEqual({
+            expect(clickCaptureInstances.find((item) => item.el === div1)).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {
@@ -235,7 +235,7 @@ const doc = window.document;
             expect(clickNonCaptureInstances).toBeInstanceOf(Array);
             expect(clickNonCaptureInstances).toHaveLength(2);
 
-            expect(clickNonCaptureInstances.find(item => item.el === div2)).toStrictEqual({
+            expect(clickNonCaptureInstances.find((item) => item.el === div2)).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {
@@ -248,7 +248,7 @@ const doc = window.document;
               el: div1,
             });
 
-            expect(clickNonCaptureInstances.find(item => item.el === div3)).toStrictEqual({
+            expect(clickNonCaptureInstances.find((item) => item.el === div3)).toStrictEqual({
               binding: {
                 arg: 'pointerdown',
                 modifiers: {

@@ -3,16 +3,25 @@
   "version": "4.0.17",
   "description": "Vue directive to react on clicks outside an element.",
   "homepage": "https://github.com/Xotic750/v-click-outside-x.git",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Xotic750/v-click-outside-x.git"
+  "author": {
+    "name": "Graham Fairweather",
+    "email": "xotic750@gmail.com"
   },
-  "bugs": {
-    "url": "https://github.com/Xotic750/v-click-outside-x/issues"
-  },
-  "main": "dist/v-click-outside-x.js",
+  "copyright": "Copyright (c) 2018-present",
+  "keywords": [
+    "vue",
+    "click",
+    "outside",
+    "directive"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
   "module": "dist/v-click-outside-x.esm.js",
+  "main": "dist/v-click-outside-x.js",
   "typings": "types/index.d.ts",
+  "jsdelivr": "dist/v-click-outside-x.min.js",
   "scripts": {
     "build:esm": "mkdirp dist && babel -s true --env-name esm src/v-click-outside-x.js -o dist/v-click-outside-x.esm.js",
     "build:base": "webpack --bail --progress --profile --colors",
@@ -28,25 +37,18 @@
     "security-fix": "npm run security -- fix",
     "start": "nodemon --exec \"npm run build\" --watch src",
     "test": "npm run clean:coverage && jest",
-    "test:ci": "npm run test -- --ci --maxWorkers=2 --coverage --coverageReporters=text-lcov | coveralls",
+    "test:ci": "npm run test -- --ci --maxWorkers=2",
+    "test:ci-coveralls": "npm run test:ci -- --coverage --coverageReporters=text-lcov | coveralls",
     "test:coverage": "npm run test -- --coverage"
   },
-  "author": {
-    "name": "Graham Fairweather",
-    "email": "xotic750@gmail.com"
-  },
-  "copyright": "Copyright (c) 2018-present",
   "license": "MIT",
-  "keywords": [
-    "vue",
-    "click",
-    "outside",
-    "directive"
-  ],
-  "files": [
-    "dist",
-    "src"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Xotic750/v-click-outside-x.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Xotic750/v-click-outside-x/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -58,6 +60,7 @@
     "@babel/runtime": "^7.5.5",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
+    "@types/webpack": "^4.39.1",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "@xotic750/eslint-config-recommended": "^1.1.7",

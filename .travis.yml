@@ -7,10 +7,12 @@ branches:
 notifications:
   email: false
 node_js:
-  - "12"
-  - "10"
-  - "8"
+  - '12'
+  - '10'
+  - '8'
 script:
   - npm run test:ci
+after_success:
+  - npm run test:ci-coveralls
 matrix:
   fast_finish: true
