@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2019-08-28T18:30:40.776Z",
+  "date": "2019-08-30T23:13:08.101Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "3528fcb11d2fd0c84e6b",
+  "hash": "ad436022343656f45d78",
   "license": "MIT",
   "version": "4.0.19"
 }
