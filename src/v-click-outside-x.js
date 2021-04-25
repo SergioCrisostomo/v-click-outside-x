@@ -1,4 +1,6 @@
-import {version} from '../package.json';
+import pkg from '../package.json';
+
+const version = pkg.version
 
 /**
  * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
@@ -21,13 +23,13 @@ const instancesList = [captureInstances, nonCaptureInstances];
  * @returns {undefined} Default.
  */
 const commonHandler = function onCommonEvent(context, instances, event, arg) {
-  const {target} = event;
+  const { target } = event;
 
   const itemIteratee = function itemIteratee(item) {
-    const {el} = item;
+    const { el } = item;
 
     if (el !== target && !el.contains(target)) {
-      const {binding} = item;
+      const { binding } = item;
 
       if (binding.modifiers.stop) {
         event.stopPropagation();
@@ -149,7 +151,7 @@ export const directive = Object.defineProperties(
           instances[arg] = [];
         }
 
-        if (instances[arg].push({el, binding: normalisedBinding}) === 1) {
+        if (instances[arg].push({ el, binding: normalisedBinding }) === 1) {
           /* istanbul ignore next */
           if (typeof document === 'object' && document) {
             document.addEventListener(arg, getEventHandler(useCapture, arg), useCapture);
