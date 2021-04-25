@@ -1,8 +1,8 @@
 {
   "name": "v-click-outside-x",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "Vue directive to react on clicks outside an element.",
-  "homepage": "https://github.com/Xotic750/v-click-outside-x.git",
+  "homepage": "https://github.com/SergioCrisostomo/v-click-outside-x.git",
   "author": {
     "name": "Graham Fairweather"
   },

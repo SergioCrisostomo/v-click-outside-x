@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2018-present",
-  "date": "2021-04-25T08:50:07.373Z",
+  "date": "2021-04-25T10:03:52.017Z",
   "describe": "",
   "description": "Vue directive to react on clicks outside an element.",
   "file": "v-click-outside-x.js",
-  "hash": "1bad856f66aad3a57637",
+  "hash": "178d9f5de12efbbd3fe7",
   "license": "MIT",
-  "version": "4.1.1"
+  "version": "4.1.2"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -156,7 +156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"a\":\"4.1.1\"}");
+module.exports = JSON.parse("{\"name\":\"v-click-outside-x\",\"version\":\"4.1.2\",\"description\":\"Vue directive to react on clicks outside an element.\",\"homepage\":\"https://github.com/SergioCrisostomo/v-click-outside-x.git\",\"author\":{\"name\":\"Graham Fairweather\"},\"maintainers\":[{\"name\":\"Sérgio Crisóstomo\",\"email\":\"sergiosbox@gmail.com\"}],\"copyright\":\"Copyright (c) 2018-present\",\"keywords\":[\"vue\",\"click\",\"outside\",\"directive\"],\"files\":[\"dist\",\"src\"],\"module\":\"dist/v-click-outside-x.esm.js\",\"main\":\"dist/v-click-outside-x.js\",\"typings\":\"types/index.d.ts\",\"jsdelivr\":\"dist/v-click-outside-x.min.js\",\"scripts\":{\"build:esm\":\"mkdirp dist && babel -s true --env-name esm src/v-click-outside-x.js -o dist/v-click-outside-x.esm.js\",\"build:base\":\"webpack --bail --progress --profile --colors\",\"build\":\"npm run build:esm && cross-env NODE_ENV=production npm run build:base --\",\"build:dev\":\"npm run build:base --\",\"clean\":\"rimraf dist && npm run clean:coverage\",\"clean:coverage\":\"rimraf __tests__/coverage\",\"lint\":\"eslint -f 'node_modules/eslint-friendly-formatter' --ext .js,.json .\",\"lint-fix\":\"npm run lint -- --fix\",\"report\":\"npm run build -- --env.report\",\"report:dev\":\"npm run build:dev -- --env.report\",\"security\":\"npm audit\",\"security-fix\":\"npm run security -- fix\",\"start\":\"nodemon --exec \\\"npm run build\\\" --watch src\",\"test\":\"npm run clean:coverage && jest\",\"test:ci\":\"npm run test -- --ci --maxWorkers=2\",\"test:ci-coveralls\":\"npm run test:ci -- --coverage --coverageReporters=text-lcov | coveralls\",\"test:coverage\":\"npm run test -- --coverage\"},\"license\":\"MIT\",\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/Xotic750/v-click-outside-x.git\"},\"bugs\":{\"url\":\"https://github.com/Xotic750/v-click-outside-x/issues\"},\"dependencies\":{},\"devDependencies\":{\"@babel/cli\":\"^7.13.16\",\"@babel/core\":\"^7.13.16\",\"@babel/node\":\"^7.13.13\",\"@babel/plugin-transform-property-mutators\":\"^7.12.13\",\"@babel/plugin-transform-runtime\":\"^7.13.15\",\"@babel/preset-env\":\"^7.13.15\",\"@babel/runtime\":\"^7.13.17\",\"@types/jest\":\"^24.9.1\",\"@types/node\":\"^13.13.50\",\"@types/webpack\":\"^4.41.27\",\"@typescript-eslint/eslint-plugin\":\"^2.34.0\",\"@typescript-eslint/parser\":\"^2.34.0\",\"babel-core\":\"^7.0.0-0\",\"babel-eslint\":\"^10.1.0\",\"babel-loader\":\"^8.2.2\",\"babel-plugin-lodash\":\"^3.3.4\",\"caniuse-lite\":\"^1.0.30001214\",\"coveralls\":\"^3.1.0\",\"cross-env\":\"^6.0.3\",\"eslint\":\"^6.8.0\",\"eslint-friendly-formatter\":\"^4.0.1\",\"eslint-import-resolver-webpack\":\"^0.12.2\",\"eslint-loader\":\"^3.0.4\",\"eslint-plugin-babel\":\"^5.3.1\",\"eslint-plugin-compat\":\"^3.9.0\",\"eslint-plugin-css-modules\":\"^2.11.0\",\"eslint-plugin-eslint-comments\":\"^3.2.0\",\"eslint-plugin-html\":\"^6.1.2\",\"eslint-plugin-import\":\"^2.22.1\",\"eslint-plugin-jest\":\"^22.17.0\",\"eslint-plugin-jsdoc\":\"^20.4.0\",\"eslint-plugin-json\":\"^1.4.0\",\"eslint-plugin-lodash\":\"^6.0.0\",\"eslint-plugin-no-use-extend-native\":\"^0.4.1\",\"eslint-plugin-prefer-object-spread\":\"^1.2.1\",\"eslint-plugin-prettier\":\"^3.4.0\",\"eslint-plugin-promise\":\"^4.3.1\",\"eslint-plugin-sort-class-members\":\"^1.11.0\",\"eslint-plugin-switch-case\":\"^1.1.2\",\"jest\":\"^24.9.0\",\"jest-cli\":\"^24.9.0\",\"jest-file\":\"^1.0.0\",\"lodash\":\"^4.17.21\",\"lodash-webpack-plugin\":\"^0.11.6\",\"mkdirp\":\"^0.5.5\",\"nodemon\":\"^2.0.7\",\"prettier\":\"^1.19.1\",\"rimraf\":\"^3.0.2\",\"source-map-loader\":\"^0.2.4\",\"strip-ansi\":\"^6.0.0\",\"terser-webpack-plugin\":\"^2.3.8\",\"typescript\":\"^3.9.9\",\"webpack\":\"^4.46.0\",\"webpack-bundle-analyzer\":\"^3.9.0\",\"webpack-cli\":\"^3.3.12\",\"webpack-global-object-x\":\"^1.0.1\",\"webpack-merge\":\"^4.2.2\"},\"engines\":{\"node\":\">=8.11.4\",\"npm\":\">=6.10.1\"},\"browserslist\":[\"> 1%\",\"Explorer >= 9\"]}");
 
 /***/ }),
 /* 1 */
@@ -177,6 +177,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+var version = _package_json__WEBPACK_IMPORTED_MODULE_0__.version;
 /**
  * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
  */
@@ -368,7 +369,7 @@ var directive = Object.defineProperties({}, {
   /* Note: This needs to be manually updated to match package.json. */
   version: {
     enumerable: true,
-    value: _package_json__WEBPACK_IMPORTED_MODULE_0__[/* version */ "a"]
+    value: version
   }
 });
 /**
