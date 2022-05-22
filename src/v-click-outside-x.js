@@ -1,6 +1,4 @@
-import pkg from '../package.json';
-
-const version = pkg.version
+import { version } from '../package.json';
 
 /**
  * @typedef {import("../types/index.d.ts")} VClickOutsidePlugin
